@@ -1,0 +1,19 @@
+<resources>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_black">#000000</color>
+
+    <color name="blue_theme">#3f51b5</color>
+    <color name="blue_theme_background">#EBEAF6</color>
+
+    <color name="canvas">#FF404040</color>
+    <color name="bar">#C0202020</color>
+    <color name="text">#FFFFFFFF</color>
+    <color name="name">#FF000000</color>
+    <color name="info">#C0505050</color>
+    <color name="titlebar_background_start">#8B1A1A</color>
+    <color name="titlebar_background_end">#CD2626</color>
+    <color name="list_bg_1">#000000</color>
+    <color name="list_bg_2">#171717</color>
+</resources>

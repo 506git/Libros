@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data/>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:clickable="true"
+        android:focusable="true"
+        tools:context=".login.UserInfChangeFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.72" />
+
+        <ImageButton
+            android:id="@+id/profile_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/img_border"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/text1"
+            app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/btn_profile_camera"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_img"
+            app:layout_constraintRight_toRightOf="@+id/profile_img" />
+
+        <View
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#e6e7e8"
+            app:layout_constraintBottom_toTopOf="@+id/edit_nickname"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_img" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="기본 정보"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text1"
+            app:layout_constraintHeight_percent="0.05"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2"
+            app:layout_constraintTop_toTopOf="@+id/text1" />
+
+        <TextView
+            android:id="@+id/text_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:text="닉네임"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_nickname"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2" />
+
+        <EditText
+            android:id="@+id/edit_nickname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/colorBlack"
+            app:layout_constraintBottom_toTopOf="@+id/edit_email"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2"
+            app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_email"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/btn_replace"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2"
+            app:layout_constraintTop_toBottomOf="@+id/edit_nickname" />
+
+        <Button
+            android:id="@+id/btn_replace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_radius_base"
+            android:text="@string/replace"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/guidLine3"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+            app:layout_constraintRight_toRightOf="@+id/guidLine2"
+            app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

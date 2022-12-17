@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".mobileCard.MobileCardFragment">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#efefef"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appbar" />
+
+    <RelativeLayout
+        android:id="@+id/close_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/close_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_back"
+            android:clickable="true"
+            android:focusable="true" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close_tab">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorYellow">
+
+            <TextView
+                android:id="@+id/toolbar_text"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/text_title_lib_card"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border_square"
+        app:layout_constraintBottom_toTopOf="@+id/status_layout"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.24" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="성       명"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_userNo"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine5"
+            app:layout_constraintTop_toTopOf="@+id/img_qr" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홍길동"
+            android:textSize="17sp"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine5"
+            app:layout_constraintTop_toTopOf="@+id/txt_name" />
+
+        <TextView
+            android:id="@+id/text_userNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="회원번호"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/img_barcode"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine5"
+            app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+        <TextView
+            android:id="@+id/userNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:text="1234567890"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/img_barcode"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine5"
+            app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+        <Button
+            android:id="@+id/btn_userNo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/border_radius_base"
+            android:text="회원번호"
+            android:textColor="@color/colorWhite"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/userNo"
+            app:layout_constraintHorizontal_bias="0.32"
+            app:layout_constraintLeft_toRightOf="@+id/userNo"
+            app:layout_constraintRight_toLeftOf="@+id/img_qr"
+            app:layout_constraintTop_toTopOf="@+id/userNo"
+            app:layout_constraintWidth_percent="0.18" />
+
+        <ImageView
+            android:id="@+id/img_qr"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/img_barcode"
+            app:layout_constraintRight_toRightOf="@+id/guidLine4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_barcode"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/txt_barcode"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine4"
+            app:layout_constraintTop_toBottomOf="@+id/img_qr" />
+
+        <TextView
+            android:id="@+id/txt_barcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="바코드를 터치하시면 이미지가 확대 됩니다."
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine4"
+            app:layout_constraintTop_toBottomOf="@+id/img_barcode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/status_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border_square"
+        android:padding="4dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintRight_toRightOf="@id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@id/card_layout">
+
+        <TextView
+            android:id="@+id/txt_lent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대출"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/line1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_lent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/user_Appendix"
+            app:layout_constraintLeft_toRightOf="@+id/txt_lent"
+            app:layout_constraintRight_toLeftOf="@+id/line1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/user_Appendix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/user_lent"
+
+            app:layout_constraintTop_toBottomOf="@+id/user_lent" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:background="@color/colorGray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/line2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_reserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="예약"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@+id/line1"
+            app:layout_constraintRight_toLeftOf="@+id/line2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userReserveCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/txt_reserve"
+            app:layout_constraintRight_toLeftOf="@+id/line2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:background="@color/colorGray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/line1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상태"
+            android:textColor="@color/colorPrimary"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintLeft_toRightOf="@+id/line2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/text_status"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/smart_auth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border_radius_base"
+        android:text="@string/text_smart_auth"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintTop_toBottomOf="@+id/status_layout"
+        app:layout_constraintWidth_percent="0.44" />
+
+    <Button
+        android:id="@+id/lib_modify"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_radius_base"
+        android:text="@string/text_auth_modify"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toTopOf="@+id/smart_auth"
+        app:layout_constraintWidth_percent="0.44" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_card_view"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_height="0dp"
+        android:background="@drawable/border_square"
+        app:layout_constraintBottom_toBottomOf="@+id/card_layout"
+        app:layout_constraintLeft_toLeftOf="@+id/card_layout"
+        app:layout_constraintRight_toRightOf="@+id/card_layout"
+        app:layout_constraintTop_toTopOf="@+id/card_layout">
+
+        <TextView
+            android:gravity="center"
+            android:text="error"
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

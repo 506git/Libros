@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="btworks4jce-kcmv-all-ids">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../tablet/libs/btworks4jce-kcmv-all-ids.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

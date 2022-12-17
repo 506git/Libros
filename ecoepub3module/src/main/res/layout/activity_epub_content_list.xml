@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.co.smartandwise.eco_epub3_module.Activity.EpubContentListActivity" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <FrameLayout
+                android:id="@+id/toc_item_tab"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" >
+
+                <ImageView
+                    android:id="@+id/toc_item_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/list_mock_blue" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/bookmark_tab"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" >
+
+                <ImageView
+                    android:id="@+id/bookmark_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/list_mark_blue" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/highlight_tab"
+                android:layout_width="match_parent"
+                android:layout_height="48dp" >
+
+                <ImageView
+                    android:id="@+id/highlight_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/list_highlights_blue" />
+            </FrameLayout>
+        </TableRow>
+    </TableLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

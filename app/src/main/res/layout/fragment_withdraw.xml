@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".login.WithdrawFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유의사항 및 탈퇴 동의"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_input"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#efefef"
+        app:layout_constraintBottom_toTopOf="@+id/sure"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/text_input" />
+
+    <TextView
+        android:id="@+id/text_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:text="@string/text_withdraw_body"
+        app:layout_constraintBottom_toTopOf="@+id/sure"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:ignore="TextViewEdits" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#efefef"
+        app:layout_constraintBottom_toTopOf="@+id/text_input"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#E6E7E8"
+        android:padding="12dp"
+        android:text="@string/text_withdraw_sure"
+        app:layout_constraintBottom_toTopOf="@+id/edit_pw_confirm"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/text_input" />
+
+    <EditText
+        android:id="@+id/edit_pw_confirm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="비밀번호 입력"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/user_inf_accept_btn"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/sure" />
+
+    <CheckBox
+        android:id="@+id/user_inf_accept_btn"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border_square"
+        android:button="@drawable/check_box"
+        android:text="위 내용에 동의하고 탈퇴를 진행합니다."
+        app:layout_constraintBottom_toTopOf="@+id/btn_confirm"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/edit_pw_confirm" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_transparent"
+        android:text="@string/text_cancel"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_confirm"
+        app:layout_constraintHeight_percent="0.062"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintTop_toTopOf="@+id/btn_confirm"
+        app:layout_constraintWidth_percent="0.38" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_radius_base"
+        android:text="@string/confirm"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidLine3"
+        app:layout_constraintHeight_percent="0.062"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/user_inf_accept_btn"
+        app:layout_constraintWidth_percent="0.38" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

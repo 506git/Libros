@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/text_user_nickname"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_user_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="길동2"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toRightOf="@+id/profile_img"
+        app:layout_constraintTop_toTopOf="@+id/profile_img" />
+
+    <TextView
+        android:id="@+id/text_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="icy2465@eco.co.kr"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_img"
+        app:layout_constraintLeft_toRightOf="@+id/profile_img" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="#efefef"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_img" />
+
+    <ImageButton
+        android:id="@+id/btn_notify"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tag="공지사항"
+        android:background="@drawable/btn_option_sound"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btn_qna"
+        app:layout_constraintTop_toTopOf="@+id/btn_qna" />
+
+    <ImageButton
+        android:id="@+id/btn_qna"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tag="Q&amp;A"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/btn_option_qna"
+        app:layout_constraintLeft_toRightOf="@+id/btn_notify"
+        app:layout_constraintRight_toLeftOf="@+id/btn_alarm"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <ImageButton
+        android:tag="알림 서비스"
+        android:id="@+id/btn_alarm"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_option_alarm"
+        app:layout_constraintLeft_toRightOf="@+id/btn_qna"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_qna" />
+</androidx.constraintlayout.widget.ConstraintLayout>

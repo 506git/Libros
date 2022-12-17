@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logIn_margin_top">20dp</dimen>
+    <dimen name="logIn_btn_width">300dp</dimen>
+    <dimen name="logIn_btn_height">45dp</dimen>
+    <dimen name="dialog_fragment_width">120dp</dimen>
+</resources>

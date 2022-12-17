@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">리브로스</string>
+
+    <string name="user_agent">LibrosApp</string>
+    <string name="file_provider_authority">eco.libros.android.fileprovider</string>
+
+    <string name="sdcard_dir_name">libros</string>
+
+    <string name="sangsang_scheme">sangsang</string>
+    <string name="sangsang_host">home</string>
+
+    <string name="confirm">확인</string>
+    <string name="cancel">취소</string>
+    <string name="replace">변경</string>
+
+    <string name="chooser_photo_title">사진을 선택해주세요.</string>
+
+    <string name="toast_crop_image_error_msg">사진 편집을 하지 못했습니다. 다시 시도해주세요.</string>
+    <string name="toast_barcode_error_msg">바코드를 읽을 수 없습니다. 다시 시도해주세요.</string>
+    <string name="toast_permission_error_msg">권한 허용을 하지않으면 서비스를 이용할 수 없습니다.</string>
+    <string name="toast_photo_error_msg">사진을 불러오지 못했습니다. 다시 시도해주세요.</string>
+    <string name="toast_back_button_msg">뒤로 버튼을 한번 더 누르면 종료됩니다.</string>
+    <string name="toast_app_not_found">앱을 찾을 수 없습니다.</string>
+
+    <string name="pref_boolean_permissions_checked">pref_boolean_permissions_checked</string>
+
+    <string name="ebook">ebook</string>
+    <string name="home">home</string>
+    <string name="mobile_card">mobileCard</string>
+    <string name="myContents">myContents</string>
+    <string name="newBook">newBook</string>
+
+    <string name="device_type">003</string>
+    <string name="version_default_db">VERSION_DEFAULT_DB</string>
+    <string name="msg_usb_mount">SD 카드를 마운트를 해제하셔야 이용할 수 있습니다.</string>
+    <!--    <string name="libros_logIn_id">LIBROS_LOGIN_ID</string>-->
+    <string name="msg_can_not_communication">서버와 통신할 수 없습니다.</string>
+
+    <string name="text_logIn">로그인</string>
+    <string name="text_settings">환경설정</string>
+    <string name="text_accept">서비스 이용약관</string>
+    <string name="text_cancel">취소</string>
+    <string name="text_signUp">회원가입</string>
+    <string name="text_auth">인증</string>
+    <string name="text_email">이메일</string>
+    <string name="text_change_pw">현재 비밀번호</string>
+    <string name="text_change_new_pw">새 비밀번호</string>
+    <string name="text_change_new_pw_confirm">비밀번호 확인</string>
+    <string name="text_pw">비밀번호</string>
+    <string name="text_accept_inf">전문보기</string>
+    <string name="text_pw_confirm">비밀번호확인</string>
+    <string name="text_nickname">닉네임</string>
+    <string name="text_auth_num">인증번호</string>
+    <string name="text_auth_modify">인증정보 수정</string>
+    <string name="text_smart_auth">스마트폰 인증</string>
+    <string name="text_pw_find">비밀번호변경</string>
+    <string name="hint_email_input">이메일을 입력해주세요</string>
+    <string name="hint_pw_input">비밀번호를 입력해주세요</string>
+    <string name="hint_pw_confirm_input">비밀번호를 다시 입력해주세요</string>
+    <string name="hint_nickname_input">닉네임을 입력해주세요</string>
+    <string name="hint_new_pw_input">4~20자로 입력해주세요(영문,숫자만)</string>
+    <string name="text_auth_input">인증번호를 입력해주세요</string>
+    <string name="text_title_lib_card">이씨오 도서관 회원증</string>
+
+    <string name="text_withdraw_body">
+            - 리브로스 회원 탈퇴 시,
+            리브로스의 이용내역은 모두 삭제 처리되며, 삭제 후 복원하여 사용할 수 없습니다.
+            단, 법령 에 특별한 규정이 있는 경우에는 관련 법령에 따라 보유 및 이용합니다.(자세한 내용은 개인정보처리방침 참조)\n\n
+
+            - 탈퇴 시 회원이 그동안 작성하였던 모든 내용은 삭제됩니다.\n\n
+
+            - 탈퇴 후 회원 재가입은 5일이 지난 이후에 가능합니다.
+        </string>
+    <string name="text_withdraw_sure">
+        안내 사항을 모두 확인하였으며,\n탈퇴 시 데이터 복구가 불가함에 동의합니다.\n또한, 리브로스를 탈퇴하는 경우 탈퇴 아이디의 재사용이 불가함에 동의합니다.
+    </string>
+
+    <string name="deny_message_essential_permission">앱 이용을 위한 필수 권한입니다. 권한 이용에 동의 해 주셔야 앱 이용이 가능합니다.</string>
+
+    <string name="deny_message_exec_permission">해당 기능을 사용하기 위한 권한입니다. 권한 이용에 동의 해 주셔야 해당 기능 이용이 가능합니다. </string>
+
+    <string name="text_login_guide">리브로스 회원이시면 이메일 계정으로 로그인하세요.</string>
+    <string name="text_pw_find_guide">가입하신 아이디(이메일)을 입력하시면 해당 이메일로 인증번호가 발송됩니다.</string>
+    <string name="text_mail_error_guide">메일 발송이 안되면 리브로피아\n고객센터로 연락주시기 바랍니다.\n\n전화번호 : 1899-3277</string>
+
+    <string name="lifeBooks_host">http://14.63.223.63:7080/api/login</string>
+    <string name="lifeBooks_main">https://eco.lifebooks.kr/m/mypage/myshelf</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="url_libropia">http://m.libropia.co.kr</string>
+    <string name="url_libropia_web">http://m.libropia.co.kr/LibropiaWebService/request/requestService.jsp?</string>
+    <string name="url_libros_web">http://192.168.7.122:33400/</string>
+    <string name="url_libros_ebook_server">http://info.libropia.co.kr:81/ebook/</string>
+
+    <string name="libros_login_id">LIBROS_LOGIN_ID</string>
+    <string name="libros_login_no">LIBROS_LOGIN_NO</string>
+    <string name="libros_login_pw">LIBROS_LOGIN_PW</string>
+    <string name="libros_last_lib_code">LIBROS_LAST_LIB_CODE</string>
+    <string name="libros_lib_certify_kind">LIBROS_LIB_CERTIFY_KIND</string>
+    <string name="libros_lib_user_id">LIBROS_LIB_USER_ID</string>
+    <string name="libros_lib_user_no">LIBROS_LIB_USER_NO</string>
+    <string name="libros_lib_user_pw">LIBROS_LIB_USER_PW</string>
+    <string name="libros_lib_name">LIBROS_LIB_NAME</string>
+    <string name="title_activity_settings_main">SettingsMainActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="user_inf_header">회원정보</string>
+    <string name="push_header">알림 설정</string>
+    <string name="support_header">고객 지원</string>
+    <string name="inf_header">정보</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+</resources>

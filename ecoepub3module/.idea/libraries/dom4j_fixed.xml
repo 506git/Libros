@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dom4j-fixed">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../tablet/libs/dom4j-fixed.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data/>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+      <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_pw_find_guide"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_email"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_email_input"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_email"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/input_border"
+        android:hint="@string/text_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_auth"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintWidth_percent="0.63" />
+
+    <Button
+        android:id="@+id/send_auth_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_radius_base"
+        android:text="인증메일전송"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_email"
+        app:layout_constraintLeft_toRightOf="@+id/guidLine3"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toTopOf="@+id/edit_email"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <TextView
+        android:id="@+id/text_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_auth_input"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_auth"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+
+    <EditText
+        android:id="@+id/edit_auth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/input_border"
+        android:hint="@string/text_auth_num"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/mail_error"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintTop_toBottomOf="@+id/edit_email"
+        app:layout_constraintWidth_percent="0.63" />
+
+    <Button
+        android:id="@+id/check_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/border_radius_base"
+        android:text="인증하기"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_auth"
+        app:layout_constraintLeft_toRightOf="@+id/guidLine3"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toTopOf="@+id/edit_auth"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <TextView
+        android:id="@+id/mail_error"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/input_border"
+        android:clickable="true"
+        android:focusable="true"
+        android:lines="4"
+        android:padding="18dp"
+        android:gravity="center_vertical"
+        app:layout_constraintHeight_percent="0.23"
+        android:text="@string/text_mail_error_guide"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/line4"
+        app:layout_constraintLeft_toLeftOf="@id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/edit_auth" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

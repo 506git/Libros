@@ -1,0 +1,399 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.smartandwise.eco_epub3_module.Activity.EpubViewerActivity">
+
+    <kr.co.smartandwise.eco_epub3_module.View.PaginationWebView
+        android:id="@+id/background_viewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false" />
+
+    <kr.co.smartandwise.eco_epub3_module.View.EpubWebView
+        android:id="@+id/viewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
+    <RelativeLayout
+        android:id="@+id/page_prev"
+        android:layout_width="@dimen/viewer_pager_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true" />
+
+    <RelativeLayout
+        android:id="@+id/page_next"
+        android:layout_width="@dimen/viewer_pager_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
+
+    <LinearLayout
+        android:id="@+id/view_pagebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="@dimen/view_pagebar_padding"
+        android:visibility="invisible">
+
+        <SeekBar
+            android:id="@+id/page_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans"
+            android:text="@string/doing_pagination" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/viewer_setting_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="#99000000"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#eeffffff"
+            android:orientation="vertical"
+            android:padding="@dimen/setting_layout_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_layout_size"
+                android:orientation="horizontal"
+                android:padding="@dimen/setting_item_padding">
+
+                <TextView
+                    android:layout_width="@dimen/setting_item_title_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/setting_item_margin"
+                    android:text="@string/setting_bightness"
+                    android:textSize="@dimen/setting_item_title_font_size" />
+
+                <SeekBar
+                    android:id="@+id/brightness_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:max="@string/maximum_brightness" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_layout_size"
+                android:orientation="horizontal"
+                android:padding="@dimen/setting_item_padding">
+
+                <TextView
+                    android:layout_width="@dimen/setting_item_title_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/setting_item_margin"
+                    android:text="@string/setting_theme"
+                    android:textSize="@dimen/setting_item_title_font_size" />
+
+                <Spinner
+                    android:id="@+id/viewer_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_item_size"
+                    android:layout_marginBottom="@dimen/setting_item_margin"
+                    android:layout_marginEnd="@dimen/setting_item_margin"
+                    android:layout_marginLeft="@dimen/setting_item_margin_large"
+                    android:layout_marginRight="@dimen/setting_item_margin"
+                    android:layout_marginStart="@dimen/setting_item_margin_large"
+                    android:layout_marginTop="@dimen/setting_item_margin"
+                    android:background="@drawable/setting_spinner" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_layout_size"
+                android:orientation="horizontal"
+                android:padding="@dimen/setting_item_padding">
+
+                <TextView
+                    android:layout_width="@dimen/setting_item_title_width"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/setting_item_margin"
+                    android:text="@string/setting_font"
+                    android:textSize="@dimen/setting_item_title_font_size" />
+
+                <Spinner
+                    android:id="@+id/viewer_font_face"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/setting_item_size"
+                    android:layout_marginBottom="@dimen/setting_item_margin"
+                    android:layout_marginEnd="@dimen/setting_item_margin"
+                    android:layout_marginLeft="@dimen/setting_item_margin_large"
+                    android:layout_marginRight="@dimen/setting_item_margin"
+                    android:layout_marginStart="@dimen/setting_item_margin_large"
+                    android:layout_marginTop="@dimen/setting_item_margin"
+                    android:background="@drawable/setting_spinner" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_layout_size"
+                android:orientation="horizontal"
+                android:padding="@dimen/setting_item_padding">
+
+                <View
+                    android:layout_width="@dimen/setting_item_title_width"
+                    android:layout_height="@dimen/setting_item_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/setting_item_margin" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:orientation="horizontal"
+                    android:padding="0dp">
+
+                    <Button
+                        android:id="@+id/font_size_down"
+                        android:layout_width="@dimen/setting_item_size"
+                        android:layout_height="@dimen/setting_item_size"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/setting_item_margin"
+                        android:background="@drawable/setting_button_down"
+                        android:scaleType="centerInside" />
+
+                    <Button
+                        android:id="@+id/font_size_up"
+                        android:layout_width="@dimen/setting_item_size"
+                        android:layout_height="@dimen/setting_item_size"
+                        android:layout_margin="@dimen/setting_item_margin"
+                        android:layout_toLeftOf="@id/font_size_down"
+                        android:layout_toStartOf="@id/font_size_down"
+                        android:background="@drawable/setting_button_up"
+                        android:scaleType="centerInside" />
+
+                    <Spinner
+                        android:id="@+id/viewer_font_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/setting_item_size"
+                        android:layout_marginBottom="@dimen/setting_item_margin"
+                        android:layout_marginEnd="@dimen/setting_item_margin"
+                        android:layout_marginLeft="@dimen/setting_item_margin_large"
+                        android:layout_marginRight="@dimen/setting_item_margin"
+                        android:layout_marginStart="@dimen/setting_item_margin_large"
+                        android:layout_marginTop="@dimen/setting_item_margin"
+                        android:layout_toLeftOf="@id/font_size_up"
+                        android:layout_toStartOf="@id/font_size_up"
+                        android:background="@drawable/setting_spinner" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/setting_item_margin_large">
+
+                <Button
+                    android:id="@+id/setting_apply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/setting_apply_button"
+                    android:text="@string/setting_apply"
+                    android:textColor="@color/blue_theme"
+                    android:textSize="18sp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/setting_out_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/setting_layout" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/viewer_highlight_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/highlight_layout_margin_top"
+        android:layout_marginTop="@dimen/highlight_layout_margin_top"
+        android:background="@color/blue_theme_background"
+        android:orientation="vertical"
+        android:padding="@dimen/highlight_layout_padding"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/highlight_layout_inner_margin"
+            android:background="@color/color_white"
+            android:orientation="horizontal"
+            android:padding="@dimen/highlight_layout_padding">
+
+            <ImageButton
+                android:id="@+id/remove_highlight"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_small_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_cancel" />
+
+            <ImageButton
+                android:id="@+id/color_green"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_green_off" />
+
+            <ImageButton
+                android:id="@+id/color_blue"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_blue_off" />
+
+            <ImageButton
+                android:id="@+id/color_red"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_red_off" />
+
+            <ImageButton
+                android:id="@+id/color_purple"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_purple_off" />
+
+            <ImageButton
+                android:id="@+id/color_yellow"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_yellow_off" />
+
+            <ImageButton
+                android:id="@+id/save_highlight"
+                android:layout_width="@dimen/highlight_button_size"
+                android:layout_height="@dimen/highlight_button_size"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/highlight_button_padding"
+                android:scaleType="centerInside"
+                android:src="@drawable/highlight_save" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:padding="@dimen/highlight_layout_inner_padding">
+
+            <EditText
+                android:id="@+id/highlight_memo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Write a memo"
+                android:maxLines="5"
+                android:singleLine="false" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- search -->
+
+    <LinearLayout
+        android:id="@+id/search_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#ffe4e4e4"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="#ff3e51b5"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/search_box"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:hint="@string/type_keyword"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="#cce4e4e4" />
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0"
+                android:padding="15dp"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/search_result"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/left_page_curl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:src="@drawable/left_curl"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/right_page_curl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:src="@drawable/right_curl"
+        android:visibility="gone" />
+
+</RelativeLayout>

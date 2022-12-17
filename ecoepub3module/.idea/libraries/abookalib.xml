@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="abookalib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../mobile/libs/abookalib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

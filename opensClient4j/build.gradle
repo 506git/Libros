@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('opensClient4Android-1.0.11.20200811-20200811.092353-1.aar'))

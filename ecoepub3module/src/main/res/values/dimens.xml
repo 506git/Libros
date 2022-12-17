@@ -1,0 +1,53 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">8dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
+
+    <dimen name="viewer_pager_width">60dp</dimen>
+
+    <dimen name="listview_divider_height">8dp</dimen>
+    <dimen name="item_book_list_height">104dp</dimen>
+    <dimen name="item_book_list_cover_width">80dp</dimen>
+    <dimen name="item_book_list_text_padding">12dp</dimen>
+    <dimen name="item_book_list_title_max_height">60dp</dimen>
+    <dimen name="item_book_list_author_max_height">28dp</dimen>
+
+    <dimen name="view_pagebar_height">64dp</dimen>
+    <dimen name="view_pagebar_padding">2dp</dimen>
+
+    <dimen name="btn_bookmark_size">56dp</dimen>
+    <dimen name="image_bookmark_size">32dp</dimen>
+
+    <dimen name="text_chapter_padding">16dp</dimen>
+
+    <dimen name="setting_layout_width">320dp</dimen>
+    <dimen name="setting_layout_height">240dp</dimen>
+    <dimen name="setting_layout_padding">16dp</dimen>
+    <!--<dimen name="setting_item_size">50dp</dimen>-->
+    <dimen name="setting_item_image_size">40dp</dimen>
+
+    <dimen name="setting_layout_size">48dp</dimen>
+    <dimen name="setting_item_size">32dp</dimen>
+    <dimen name="setting_item_margin">4dp</dimen>
+    <dimen name="setting_item_margin_large">8dp</dimen>
+    <dimen name="setting_item_padding">4dp</dimen>
+    <dimen name="setting_item_padding_large">8dp</dimen>
+    <dimen name="setting_item_title_width">80dp</dimen>
+    <dimen name="setting_item_title_font_size">20sp</dimen>
+
+    <dimen name="setting_fintfamily_width">120dp</dimen>
+    <dimen name="setting_fontsize_width">40dp</dimen>
+
+    <dimen name="highlight_layout_margin_top">72dp</dimen>
+    <dimen name="highlight_layout_inner_margin">4dp</dimen>
+    <dimen name="highlight_layout_padding">4dp</dimen>
+    <dimen name="highlight_layout_inner_padding">8dp</dimen>
+    <dimen name="highlight_button_small_padding">16dp</dimen>
+    <dimen name="highlight_button_size">42dp</dimen>
+    <dimen name="highlight_button_padding">10dp</dimen>
+
+    <dimen name="topbar_height">60dp</dimen>
+    <dimen name="topbar_item_height">40dp</dimen>
+    <dimen name="topbar_item_weight">40dp</dimen>
+
+</resources>

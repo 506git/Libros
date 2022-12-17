@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kr.co.smartandwise.eco_epub3_module.Activity.EpubViewerActivity">
+
+    <item
+        android:id="@+id/action_bookmark"
+        android:title="@string/action_bookmark_on"
+        android:icon="@drawable/menu_mark_light_off"
+        android:orderInCategory="1"
+        app:showAsAction="always"/>
+    
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/action_search"
+        android:icon="@drawable/menu_search"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_list"
+        android:title="@string/action_list"
+        android:icon="@drawable/menu_list_light"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/menu_effect_light"
+        android:orderInCategory="4"
+        app:showAsAction="always"/>
+</menu>

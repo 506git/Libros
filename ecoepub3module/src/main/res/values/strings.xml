@@ -1,0 +1,188 @@
+<resources>
+    <string name="app_name">epub_viewer_demo</string>
+
+    <string name="title_activity_main">My Book List</string>
+    <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_list">ListActivity</string>
+
+    <string name="action_search">검색</string>
+    <string name="action_bookmark_on">북마크 설정</string>
+    <string name="action_bookmark_off">북마크 해제</string>
+    <string name="action_list">책 메뉴</string>
+    <string name="action_settings">설정</string>
+
+    <string name="tmp_book_title">Accessible EPUB 3</string>
+    <string name="tmp_book_author">Matt Garrish</string>
+
+    <string name="title_activity_epub_viewer">EpubViewerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="minimum_brightness">0</string>
+    <string name="maximum_brightness">255</string>
+
+    <string name="minimum_font_size">60</string>
+    <string name="maximum_font_size">170</string>
+
+    <!-- mapping color -->
+    <string name="highlight_green">#57E9C7</string>
+    <string name="highlight_blue">#2CACE9</string>
+    <string name="highlight_red">#E92A1C</string>
+    <string name="highlight_purple">#E921D9</string>
+    <string name="highlight_yellow">#FFFF4F</string>
+
+    <string name="setting_bightness">밝기</string>
+    <string name="setting_theme">테마</string>
+    <string name="setting_font">폰트</string>
+    <string name="setting_apply">적용</string>
+
+    <string name="no_toc_item">목차가 없습니다.</string>
+    <string name="no_bookmark">추가한 북마크가 없습니다.</string>
+    <string name="no_highlight">하이라이트가 없습니다.</string>
+
+    <string name="type_keyword">검색어를 입력하세요</string>
+
+    <string name="doing_pagination">계산중...</string>
+
+    <string name="default_theme_code">default-theme</string>
+    <string name="author_theme_code">author-theme</string>
+    <string name="night_theme_code">night-theme</string>
+    <string name="tree_theme_code">tree-theme</string>
+    <string name="sky_theme_code">sky-theme</string>
+
+    <string name="default_theme_string">기본</string>
+    <string name="author_theme_string">저자설정</string>
+    <string name="night_theme_string">나이트</string>
+    <string name="tree_theme_string">나무</string>
+    <string name="sky_theme_string">하늘</string>
+
+    <string-array name="viewer_theme">
+        <item>@string/default_theme_string</item>
+        <item>@string/author_theme_string</item>
+        <item>@string/night_theme_string</item>
+        <item>@string/tree_theme_string</item>
+        <item>@string/sky_theme_string</item>
+    </string-array>
+
+    <string name="default_font_code">normal</string>
+    <string name="sans_font_code">sans</string>
+    <string name="serif_font_code">serif</string>
+    <string name="monospace_font_code">monospace</string>
+    <string name="roboto_font_code">roboto-light</string>
+
+    <string name="default_font_string">기본폰트</string>
+    <string name="sans_font_string">Sans</string>
+    <string name="serif_font_string">Serif</string>
+    <string name="monospace_font_string">Monospace</string>
+    <string name="roboto_font_string">Roboto</string>
+
+    <string name="toast_load_toc">목차를 불러오고 있습니다.\n잠시만 기다려주세요.</string>
+    <string name="toast_load_bookmark">북마크를 불러오고 있습니다.\n잠시만 기다려주세요.</string>
+    <string name="toast_add_bookmark">북마크를 등록하였습니다.</string>
+    <string name="toast_cancel_bookmark">북마크를 취소하였습니다.</string>
+    <string name="toast_remove_highlight">하이라이트를 삭제하였습니다.</string>
+    <string name="toast_no_search_keyword">검색어를 입력해 주세요.</string>
+
+    <string name="dialog_confirm_remove_highlight">하이라이트를 삭제하겠습니까?</string>
+    <string name="dialog_confirm_yes">예</string>
+    <string name="dialog_confirm_no">아니오</string>
+    <string name="dialog_confirm_title">알림</string>
+
+    <string name="fail_to_open_book">책을 열 수 없습니다.</string>
+    <string name="invalid_scheme_call">잘못된 책정보입니다. 앱을 종료합니다.</string>
+
+    <string name="before_exit_viewer">뒤로 가기를 한 번 더 누르시면 뷰어가 종료됩니다.</string>
+
+    <string-array name="font_family">
+        <item>@string/default_font_string</item>
+        <item>@string/sans_font_string</item>
+        <item>@string/serif_font_string</item>
+        <item>@string/monospace_font_string</item>
+        <item>@string/roboto_font_string</item>
+    </string-array>
+
+    <string-array name="font_size">
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>110</item>
+        <item>120</item>
+        <item>130</item>
+        <item>140</item>
+        <item>150</item>
+        <item>160</item>
+        <item>170</item>
+    </string-array>
+
+    <string name="sdcard_dir_name">NanetEpubViewer</string>
+
+    <string name="markany_url">http://e-book.nanet.go.kr:8099/</string>
+    <string name="yes24_url">e-book.nanet.go.kr:9090</string>
+    <string name="bookmark">책갈피</string>
+    <string name="highlight">하이라이트</string>
+    <string name="toc">목차</string>
+
+    <!-- PlugPDF Text -->
+    <string name="text_search_progress">검색중...</string>
+    <string name="text_search_found_fail">검색결과가 없습니다.</string>
+    <string name="text_ok">확인</string>
+    <string name="text_cancel">취소</string>
+    <string name="text_password">비밀번호를 입력하세요</string>
+    <string name="text_rotate_lock">화면고정</string>
+    <string name="text_rotate_unlock">화면고정 해제.</string>
+    <string name="text_annot_menu_item_delete">삭제</string>
+    <string name="text_annot_menu_item_edit">수정</string>
+    <string name="text_annot_menu_item_color">색상</string>
+    <string name="text_annot_menu_item_opacity">투명도</string>
+    <string name="text_annot_menu_item_width">너비</string>
+    <string name="text_annot_menu_item_color_white">하양</string>
+    <string name="text_annot_menu_item_color_black">검정</string>
+    <string name="text_annot_menu_item_color_red">빨강</string>
+    <string name="text_annot_menu_item_color_orange">주황</string>
+    <string name="text_annot_menu_item_color_yellow">노랑</string>
+    <string name="text_annot_menu_item_color_green">초록</string>
+    <string name="text_annot_menu_item_color_blue">파랑</string>
+    <string name="text_annot_menu_item_color_purple">자주</string>
+    <string name="text_annot_menu_item_opacity_10">10%</string>
+    <string name="text_annot_menu_item_opacity_25">25%</string>
+    <string name="text_annot_menu_item_opacity_50">50%</string>
+    <string name="text_annot_menu_item_opacity_75">75%</string>
+    <string name="text_annot_menu_item_opacity_100">100%</string>
+    <string name="text_annot_menu_item_width_1">1Px</string>
+    <string name="text_annot_menu_item_width_3">3Px</string>
+    <string name="text_annot_menu_item_width_5">5Px</string>
+    <string name="text_annot_menu_item_width_7">7Px</string>
+    <string name="text_annot_menu_item_width_9">9Px</string>
+    <string name="text_annot_menu_item_width_11">11Px</string>
+
+    <!-- Text -->
+    <string name="text_search">검색</string>
+    <string name="text_color">색상</string>
+    <string name="text_fill_color">색상채우기</string>
+    <string name="text_opacity">투명도</string>
+    <string name="text_width">너비</string>
+    <string name="text_straight">straight</string>
+    <string name="text_notice">Notice</string>
+    <string name="text_url_downloading">잠시만 기다려주세요</string>
+
+    <!-- Button Label -->
+    <string name="label_save_button">저장</string>
+    <string name="label_back_button">뒤로</string>
+    <string name="label_erase_button">삭제</string>
+    <string name="label_change_button">변경</string>
+    <string name="label_outline_title">제목을 입력하세요</string>
+    <string name="label_outline_child_check">하위 목차</string>
+    <string name="text_squiggly">Squiggly</string>
+
+
+    <!-- ImageView description -->
+    <string name="bottom_menu_thumbnail">하단 섬네일</string>
+    <string name="press_back_to_close_viewer">뒤로 가기 버튼을 한 번 더 누르면 뷰어가 종료됩니다.</string>
+    <string name="remove">제거</string>
+    <string name="add">추가</string>
+</resources>

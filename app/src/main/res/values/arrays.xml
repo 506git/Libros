@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="permissions">
+        <item>android.permission.INTERNET</item>
+        <item>android.permission.ACCESS_FINE_LOCATION</item>
+        <item>android.permission.CAMERA</item>
+        <item>android.permission.WRITE_EXTERNAL_STORAGE</item>
+        <item>android.permission.READ_PHONE_STATE</item>
+    </string-array>
+
+    <string-array name="audio_permissions">
+
+        <item>android.permission.RECORD_AUDIO</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+</resources>

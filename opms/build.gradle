@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['assets']
+            res.srcDirs = ['res']
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name:'bookjam-bookapp', ext:'aar')
+    compile(name:'bookjam-papyrus', ext:'aar')
+    compile 'com.google.android.gms:play-services:10.0.1'
+    compile 'com.android.support:multidex:1.0.0'
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btn_bottom_home"
+        android:icon="@drawable/btn_bottom_home_selector"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/btn_bottom_newBook"
+        android:icon="@drawable/btn_bottom_new_book_selector"
+        android:title="@string/newBook"/>
+    <item
+        android:id="@+id/btn_bottom_mobileCard"
+        android:icon="@drawable/btn_bottom_mobile_card_selector"
+        android:title="@string/mobile_card"/>
+    <item
+        android:id="@+id/btn_bottom_ebook"
+        android:icon="@drawable/btn_bottom_ebook_selector"
+        android:title="@string/ebook"/>
+    <item
+        android:id="@+id/btn_bottom_myContents"
+        android:icon="@drawable/btn_bottom_my_content_selector"
+        android:title="@string/myContents"/>
+
+</menu>

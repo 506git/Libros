@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".mobileCard.MobileLoginCardFragment">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#efefef"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appbar" />
+
+    <RelativeLayout
+        android:id="@+id/close_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/close_btn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_back" />
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close_tab">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorYellow">
+
+            <TextView
+                android:id="@+id/toolbar_text"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/text_title_lib_card"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border_square"
+        android:paddingTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_auth"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/appbar">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidLine4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <TextView
+            android:id="@+id/text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도서관 회원명"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_id"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3" />
+
+        <EditText
+            android:layout_marginBottom="10dp"
+            android:id="@+id/edit_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="회원명을 입력해주세요."
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_no"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@id/guidLine4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도서관 회원번호"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_no"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3" />
+
+        <EditText
+
+            android:id="@+id/edit_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="도서관 회원번호를 입력해주세요."
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_pw"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine4"
+            app:layout_constraintTop_toBottomOf="@+id/edit_id" />
+
+        <TextView
+            android:id="@+id/text_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도서관 비밀번호"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/edit_pw"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3" />
+
+        <EditText
+            android:id="@+id/edit_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="도서관 비밀번호를 입력해주세요."
+            android:textSize="18sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/guidLine3"
+            app:layout_constraintRight_toRightOf="@+id/guidLine4"
+            app:layout_constraintTop_toBottomOf="@+id/edit_no"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_auth"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border_radius_base"
+        android:text="@string/text_auth"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.115"
+        app:layout_constraintLeft_toLeftOf="@+id/guidLine1"
+        app:layout_constraintRight_toRightOf="@+id/guidLine2"
+        app:layout_constraintTop_toBottomOf="@+id/card_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

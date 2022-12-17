@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="page-curl-effect">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/page-curl-effect.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

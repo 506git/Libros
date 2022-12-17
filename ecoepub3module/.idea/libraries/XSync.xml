@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="XSync">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/XSync.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

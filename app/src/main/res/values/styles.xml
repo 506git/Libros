@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceStyle</item>
+    </style>
+
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+    <style name="PreferenceStyle" parent="@style/PreferenceThemeOverlay.v14.Material">
+        <item name="preferenceCategoryStyle">@style/CustomPreferenceCategory</item>
+    </style>
+
+    <style name="CustomPreferenceCategory" parent="@style/Preference.Category">
+        <item name="android:layout">@layout/custom_preference_category</item>
+    </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Holo.Light" >
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="CustomPreferenceCategoryText" parent="@android:style/Widget.TextView">
+        <!-- Style your PreferenceCategory here. -->
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">#efefef</item>
+    </style>
+    
+<!--    <style name="CustomAnimationActivity" parent="AppTheme">-->
+<!--        <item name="android:windowAnimationStyle">@style/CustomDrawerAnimation</item>-->
+<!--    </style>-->
+
+<!--    <style name="CustomDrawerAnimation" parent="@android:style/Animation.Activity">-->
+<!--        <item name="android:activityOpenEnterAnimation">@anim/anim_slide_in_right</item>-->
+<!--        <item name="android:activityOpenExitAnimation">@anim/anim_slide_out_left</item>-->
+<!--        <item name="android:activityCloseEnterAnimation">@anim/anim_slide_in_left</item>-->
+<!--        <item name="android:activityCloseExitAnimation">@anim/anim_slide_out_right</item>-->
+<!--    </style>-->
+</resources>

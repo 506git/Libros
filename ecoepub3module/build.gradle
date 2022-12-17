@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs = [] //important!!!! disable automatic ndk-build call
+    }
+}
+
+task deleteOldJar(type: Delete) {
+    delete 'release/epub3module.jar'
+}
+
+//task to export contents as jar
+task exportJar(type: Copy) {
+    from('build/intermediates/bundles/release/')
+    into('release/')
+    include('classes.jar')
+    ///Give whatever name you want to give
+    rename('classes.jar', 'epub3module.jar')
+}
+
+exportJar.dependsOn(deleteOldJar, build)
+
+dependencies {
+    implementation 'com.android.support:support-v4:26.+'
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.google.code.gson:gson:2.3'
+    implementation project(':btworks4jce')
+    implementation project(':btworks')
+    implementation project(':dom4j')
+    implementation project(':XSync')
+    implementation project(':plugpdf')
+}

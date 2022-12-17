@@ -1,0 +1,65 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <eco.libros.android.settings.HeaderViewPreference
+        android:key="header"
+        app:layout="@layout/custom_preference_header" />
+    <PreferenceCategory
+        app:layout="@layout/custom_preference_category"
+        app:title="@string/user_inf_header">
+
+        <Preference
+            android:key="user_inf_change"
+            android:title="회원정보 변경"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="pw_change"
+            android:title="비밀번호 변경"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="logout"
+            android:title="로그아웃"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="withdraw"
+            android:title="회원탈퇴"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/custom_preference_category"
+        app:title="@string/push_header">
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="false"
+            app:key="push"
+            app:title="푸시 알림 받기" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/custom_preference_category"
+        app:title="@string/support_header">
+        <Preference
+            android:key="notification"
+            android:title="공지사항"
+            app:iconSpaceReserved="false"></Preference>
+        <Preference
+            android:key="qna"
+            android:title="Q&amp;A"
+            app:iconSpaceReserved="false"></Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/custom_preference_category"
+        app:title="@string/inf_header">
+        <PreferenceScreen
+            android:key="version"
+            android:title="앱버전"
+            android:summary="0.0.0"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="use_accept"
+            android:title="이용약관"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>
