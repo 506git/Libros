@@ -33,6 +33,8 @@ class LibrosUpload {
                 .addFormDataPart("thumbnail",ebookdata.thumbnail)
                 .build()
 
+        Log.d("test",body.parts.toString())
+
         val request = Request.Builder().url(url).method("POST", body).build()
         withContext(Dispatchers.IO){
             withContext(Dispatchers.IO){

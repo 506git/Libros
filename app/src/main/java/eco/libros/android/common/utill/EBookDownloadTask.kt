@@ -3,6 +3,7 @@ package eco.libros.android.common.utill
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
@@ -10,6 +11,7 @@ import android.widget.ProgressBar
 import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
+import eco.libros.android.common.api.LibrosUpload
 import eco.libros.android.common.database.EbookDownloadDBFacade
 import eco.libros.android.common.database.UserLibListDBFacade
 import eco.libros.android.common.database.ViewerDBFacade
@@ -17,13 +19,17 @@ import eco.libros.android.common.model.EbookListVO
 import eco.libros.android.common.variable.GlobalVariable
 import eco.libros.android.ebook.download.*
 import eco.libros.android.myContents.MyEbookListModel
+import eco.libros.android.ui.MainActivity
+import eco.libros.android.utils.CompressZip
 import io.socket.client.Socket
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import kr.eco.common.ebook.viewer.file.drm.eco.EBookImageDrmEcoMoaAsyncTask
+import java.io.File
 import java.util.*
 
 class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _downloadPlace: String, socket : Socket) {
@@ -99,19 +105,16 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
                         "YES24" -> {
                             val libCode = ebookData.libCode
-//                            val userInfo = UserLibListDBFacade(myActivity).getCertifyInfo(libCode)
 
-                            val userInfo = UserLibListDBFacade(myActivity).getCertifyInfo(libCode)
-//                            if (userInfo?.eBookId == null || userInfo.eBookId.trim()
-//                                    .isEmpty() || userInfo.eBookPw.trim().isEmpty()
-//                            ) {
-//                                return@withContext null
-//                            }
+                            if (ebookData == null || ebookData.returnLink == null || ebookData.returnLink.trim().isEmpty()) {
+                                return@withContext  null
+                            }
 
-                            val ebookUserId = userInfo?.eBookId
-                            val ebookUserPw = userInfo?.eBookPw
-//                            val ebookUserId = "ecotest"
-//                            val ebookUserPw = "ecotest"
+                            val link = ebookData.returnLink
+                            val ebookUserId = Uri.parse(link).getQueryParameter("user_id").toString()
+                            ebookData.ePubId = ebookUserId;
+//                            val ebookUserId = userId
+                            val ebookUserPw = ebookUserId
                             val downYes24 = EBookDownloadYES24(
                                 mActivity,
                                 mActivity.resources.getString(R.string.sdcard_dir_name),
@@ -133,6 +136,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
                         "OPMS_MARKANY", "OPMS" -> {
                             if (ebookData.downloadLink.isNotEmpty()) {
+                                ebookData.downloadLink = ebookData.downloadLink + LibrosUtil.getOriginDeviceId(mActivity).toString()
                                 val downOPMS = EBookDownloadOPMS()
                                 fileName = downOPMS.down(
                                     mActivity,
@@ -148,35 +152,53 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                             progressBar.progressTask(98)
                             var insertResult: Int = 1
                             try {
-                                EbookDownloadDBFacade(mActivity).insertData(
-                                    ebook = EbookListVO(
-                                        fileName = fileName!!,
-                                        fileType = ebookData.fileType,
-                                        isbn = ebookData.isbn,
-                                        bookId = ebookData.id,
-                                        returnDate = "",
-                                        title = ebookData.title,
-                                        libName = ebookData.libName,
-                                        libCode = ebookData.libCode,
-                                        drmInfo = "",
-                                        thumbnail = ebookData.thumbnail,
-                                        comKey = ebookData.lentKey,
-                                        lentKey = ebookData.lentKey,
-                                        useStartTime = ebookData.useStartTime,
-                                        useEndTime = ebookData.useEndTime,
-                                        downloadYn = "Y",
-                                        drm = ebookData.comCode
-                                    )
-                                )
-                                ViewerDBFacade(mActivity).insertOrUpdateBook(
-                                    ebookData.lentKey,
-                                    "${LibrosUtil.getEPUBRootPath(mActivity)}/${
-                                        mActivity.applicationContext.getString(
-                                            R.string.sdcard_dir_name
-                                        )
-                                    }/$fileName/$fileName",
-                                    null
-                                )
+//                                EbookDownloadDBFacade(mActivity).insertData(
+//                                    ebook = EbookListVO(
+//                                        fileName = fileName!!,
+//                                        fileType = ebookData.fileType,
+//                                        isbn = ebookData.isbn,
+//                                        bookId = ebookData.id,
+//                                        returnDate = "",
+//                                        title = ebookData.title,
+//                                        libName = ebookData.libName,
+//                                        libCode = ebookData.libCode,
+//                                        drmInfo = "",
+//                                        thumbnail = ebookData.thumbnail,
+//                                        comKey = ebookData.lentKey,
+//                                        lentKey = ebookData.lentKey,
+//                                        useStartTime = ebookData.useStartTime,
+//                                        useEndTime = ebookData.useEndTime,
+//                                        downloadYn = "Y",
+//                                        drm = ebookData.comCode
+//                                    )
+//                                )
+//                                ViewerDBFacade(mActivity).insertOrUpdateBook(
+//                                    ebookData.lentKey,
+//                                    "${LibrosUtil.getEPUBRootPath(mActivity)}/${
+//                                        mActivity.applicationContext.getString(
+//                                            R.string.sdcard_dir_name
+//                                        )
+//                                    }/$fileName/$fileName",
+//                                    null
+//                                )
+                                var path = ""
+                                var zipFile : File? = null
+                                withContext(IO){
+                                    path = "${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.applicationContext.getString(R.string.sdcard_dir_name)}/${fileName}"
+                                    zipFile = CompressZip().compress("$path/$fileName", path, fileName)
+                                }
+
+                                runBlocking {
+                                    val mSocket = (mActivity as MainActivity).mSocket
+                                    LibrosUpload().upload(ebookData.uploadUrl, zipFile!!, ebookData, mSocket)
+                                }
+//                                val deleteFile: File = File(path)
+////
+//                                if (deleteFile != null && deleteFile.exists()) {
+//                                    FileManager().deleteFolder(deleteFile)
+//                                }
+
+
                             } catch (e: java.lang.Exception) {
                                 insertResult = -1
                             }

@@ -54,8 +54,9 @@ class MainActivity : AppCompatActivity(){
         checkPermission()
         mSocket = IO.socket(BASE_URL).connect()
 //        val yesData = "{\"thumbnail\":\"https://epbook.eplib.or.kr/resources/images/yes24/Msize/112361381M.jpg\",\"author\":\"심윤경 저\",\"lent_key\":\"1506740\",\"return_key\":\"238298\",\"epubID\":\"1506740\",\"title\":\"나의 아름다운 할머니\",\"return_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=112361381&proc_mode=return&lent_key=238298&udid=\",\"book_info_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_010_ebook_detail_json?version=v20&lib_code=111042&id=112361381&udid=&user_id=ecotest&portal_id=\",\"comcode\":\"YES24\",\"cover\":\"https://epbook.eplib.or.kr/resources/images/yes24/Msize/112361381M.jpg\",\"ebook_lib_name\":\"은평구립공공도서관\",\"extending_count\":\"0\",\"lending_date\":\"2022-12-20\",\"lending_expired_date\":\"2022-12-26\",\"drm_url_info\":\"http://epbook.eplib.or.kr:8088/\",\"ISBN\":\"9791160949674\",\"platform_type\":\"\",\"lib_code\":\"111042\",\"file_type\":\"EPUB\",\"publisher\":\"사계절\",\"extension_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=112361381&proc_mode=extension&lent_key=238298&udid=\",\"id\":\"112361381\",\"drm_key\":\"1506740\"}"
+        val yesData = "{\"thumbnail\":\"https://epbook.eplib.or.kr/resources/images/yes24/Msize/96705004.jpg\",\"author\":\"<김필영> 저\",\"lent_key\":\"1253624\",\"return_key\":\"239735\",\"epubID\":\"1253624\",\"title\":\"5분 뚝딱 철학 : 생각의 역사\",\"return_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=96705004&proc_mode=return&lent_key=239735&udid=\",\"book_info_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_010_ebook_detail_json?version=v20&lib_code=111042&id=96705004&udid=&user_id=ecotest&portal_id=\",\"comcode\":\"YES24\",\"cover\":\"https://epbook.eplib.or.kr/resources/images/yes24/Msize/96705004.jpg\",\"ebook_lib_name\":\"은평구립공공도서관\",\"extending_count\":\"0\",\"lending_date\":\"2023-01-02\",\"lending_expired_date\":\"2023-01-08\",\"drm_url_info\":\"http://epbook.eplib.or.kr:8088/\",\"ISBN\":\"9791190238328\",\"platform_type\":\"\",\"lib_code\":\"111042\",\"file_type\":\"EPUB\",\"publisher\":\"스마트북스\",\"extension_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=96705004&proc_mode=extension&lent_key=239735&udid=\",\"id\":\"96705004\",\"drm_key\":\"1253624\"}"
+        val opmsData = "{\"thumbnail\":\"https://epbook.eplib.or.kr/resources/images/opms/9788946790599.jpg\",\"author\":\"전영진\",\"lent_key\":\"240201\",\"return_key\":\"240201\",\"title\":\"역사의 이해(개정판)\",\"return_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=9788946790599&proc_mode=return&lent_key=240201&udid=\",\"book_info_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_010_ebook_detail_json?version=v20&lib_code=111042&id=9788946790599&udid=&user_id=ecotest&portal_id=\",\"comcode\":\"OPMS_MARKANY\",\"cover\":\"https://epbook.eplib.or.kr/resources/images/opms/9788946790599.jpg\",\"ebook_lib_name\":\"은평구립공공도서관\",\"extending_count\":\"0\",\"lending_date\":\"2023-01-05\",\"lending_expired_date\":\"2023-01-11\",\"drm_url_info\":\"http://210.112.12.42/\",\"download_link\":\"http://madrm.booxen.com/markany/downloadServer/madownloadServer2.asp?SPID=B2B_EPLIB&USER=ecotest&SPPID=125315_0&CID=CPP0000077271&DEVCODE=3&STARTDAY=20230105&ENDDAY=20230118&FILETYPE=EPUB&DEVKEY=\",\"ISBN\":\"9788946790599\",\"platform_type\":\"\",\"lib_code\":\"111042\",\"file_type\":\"EPUB\",\"publisher\":\"학문사\",\"extension_link\":\"http://211.253.36.163:38444/ebook/Libros_S16_011_ebook_procesing_json?version=v20&user_id=ecotest&lib_code=111042&id=9788946790599&proc_mode=extension&lent_key=240201&udid=\",\"id\":\"9788946790599\",\"drm_key\":\"\"}"
         mSocket.on(io.socket.client.Socket.EVENT_CONNECT) {
-            Log.d("test2", "connect")
             sendStatus("connect")
             sendStatus("ready")
         }.on(Socket.EVENT_DISCONNECT) { args ->
@@ -70,8 +71,6 @@ class MainActivity : AppCompatActivity(){
                 sendStatus("working")
                 val gson = Gson()
                 val list = gson.fromJson(data, MyEbookListModel::class.java)
-//                Log.d("TESTWORKINGdata", data.toString())
-                Log.d("TESTWORKINGlist", list.toString())
                 EBookDownloadTask(
                     _activity = this@MainActivity,
                     _ebookData = list,
@@ -80,6 +79,36 @@ class MainActivity : AppCompatActivity(){
                 ).downloadEBook()
             }
         })
+
+        findViewById<Button>(R.id.btn_yes_start).setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+//                sendStatus("working")
+                val gson = Gson()
+                val list = gson.fromJson(yesData, MyEbookListModel::class.java)
+                Log.d("TESTWORKINGlist", list.toString())
+                EBookDownloadTask(
+                    _activity = this@MainActivity,
+                    _ebookData = list,
+                    _downloadPlace = "detail",
+                    mSocket
+                ).downloadEBook()
+            }
+        }
+
+        findViewById<Button>(R.id.btn_opms_start).setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+//                sendStatus("working")
+                val gson = Gson()
+                val list = gson.fromJson(opmsData, MyEbookListModel::class.java)
+                Log.d("TESTWORKINGlist", list.toString())
+                EBookDownloadTask(
+                    _activity = this@MainActivity,
+                    _ebookData = list,
+                    _downloadPlace = "detail",
+                    mSocket
+                ).downloadEBook()
+            }
+        }
     }
 
     fun sendStatus(message : String){

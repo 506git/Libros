@@ -26,7 +26,7 @@ data class MyEbookListModel(
         val cover: String,
 
         @SerializedName("epubID")
-        val ePubId: String?,
+        var ePubId: String?,
 
         @SerializedName("title")
         val title: String,
@@ -53,7 +53,7 @@ data class MyEbookListModel(
         val drmUrlInfo: String,
 
         @SerializedName("download_link")
-        val downloadLink: String,
+        var downloadLink: String,
 
         @SerializedName("lib_name")
         val libName: String,

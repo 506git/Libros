@@ -144,11 +144,11 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                            )
                         }
 
-                        withContext(IO){
-                            ViewerDBFacade(mActivity).insertOrUpdateBook(
-                                eBookData.lentKey,"${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.resources.getString(R.string.sdcard_dir_name)}/${fileName}/${fileName}",null
-                            )
-                        }
+//                        withContext(IO){
+//                            ViewerDBFacade(mActivity).insertOrUpdateBook(
+//                                eBookData.lentKey,"${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.resources.getString(R.string.sdcard_dir_name)}/${fileName}/${fileName}",null
+//                            )
+//                        }
                         val file = arrayOfNulls<String?>(1)
 
                         // Type the path of the files in here
@@ -158,7 +158,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                        FileManager().zipFolder("$path/$fileName","$path/ziptest.zip")
 //                        FileManager().zipFile(file, "$path/$fileName/zipTest.zip")
 
-                        val zipFile = CompressZip().compress("$path/$fileName", path,fileName)
+                        val zipFile = CompressZip().compress("$path/$fileName", path, fileName)
 
 //                        LibrosRepository().checkAuthRepo(tempId, userAuthNum,encryptYn,resources.getString(R.string.device_type))?.let { response ->
 //                            if(response.isSuccessful){
@@ -172,11 +172,11 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                             val mSocket = (mActivity as MainActivity).mSocket
                             LibrosUpload().upload(eBookData.uploadUrl, zipFile, eBookData, mSocket)
                         }
-                        val deleteFile: File = File(path)
+//                        val deleteFile: File = File(path)
 
-                        if (deleteFile != null && deleteFile.exists()) {
-                            FileManager().deleteFolder(deleteFile)
-                        }
+//                        if (deleteFile != null && deleteFile.exists()) {
+//                            FileManager().deleteFolder(deleteFile)
+//                        }
 
 
 

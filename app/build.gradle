@@ -157,6 +157,7 @@ dependencies {
         exclude group: 'com.google.android.gcm'
         exclude group: 'com.google.android.gms'
     }
+    implementation project(':lemonToolBox-1.0.6')
     implementation project(':XSync')
 
     implementation('io.socket:socket.io-client:2.0.1') {

@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import android.webkit.WebView
 import androidx.databinding.library.BuildConfig
+import com.lemonsol.toolbox.LemonToolBox
 import eco.libros.android.common.LibrosExceptionHandler
 import io.socket.client.IO
 import io.socket.client.Socket
@@ -30,6 +31,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+
+        LemonToolBox.init(this);
 
     }
 }

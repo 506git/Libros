@@ -9,20 +9,34 @@ import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.ProgressFragment
+import eco.libros.android.common.api.LibrosUpload
 import eco.libros.android.common.database.EbookDownloadDBFacade
 import eco.libros.android.common.database.ViewerDBFacade
 import eco.libros.android.common.model.EbookListVO
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
+import eco.libros.android.ebook.PreloadAsyncTask
 import eco.libros.android.myContents.MyEbookListModel
+import eco.libros.android.ui.MainActivity
+import eco.libros.android.utils.CompressZip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kr.co.smartandwise.eco_epub3_module.Drm.yes24.AndroidZipUtil4IDS
+import kr.co.smartandwise.eco_epub3_module.Drm.yes24.parser.ImageXMLHandler
+import kr.co.smartandwise.eco_epub3_module.Drm.yes24.parser.MetaXMLHandler
 import kr.eco.common.ebook.viewer.file.drm.eco.EBookImageDrmEcoMoaAsyncTask
+import kr.eco.common.ebook.viewer.file.drm.yes24.IDSClientDecrypt
+import org.xml.sax.InputSource
 import java.io.File
+import java.io.FileInputStream
+import java.io.InputStreamReader
+import java.util.ArrayList
+import javax.xml.parsers.SAXParserFactory
 
 class EBookImageDrmYES24Task(_activity: Activity) {
     var progressBar = ProgressFragment()
@@ -73,18 +87,6 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                 obj[2] = fileName
             }
 
-            if (progressBar.isAdded) {
-                try {
-                    progressBar.dismissAllowingStateLoss()
-                } catch (e: WindowManager.BadTokenException) {
-                    // TODO: handle exception
-                    Log.e("error", e.message.toString())
-                } catch (e: IllegalArgumentException) {
-                    // TODO: handle exception
-                    Log.e("error", e.message.toString())
-                }
-            }
-
             withContext(Main) {
                 val successResult = obj[0] as Boolean
                 val eBookInfo = obj[1] as MyEbookListModel
@@ -92,35 +94,55 @@ class EBookImageDrmYES24Task(_activity: Activity) {
 
                 if (successResult) {
                     if (fileName != null) {
-                        withContext(IO) {
-                            EbookDownloadDBFacade(activity).insertData(
-                                    ebook = EbookListVO(
-                                            fileName = fileName,
-                                            libCode = eBookInfo.libCode,
-                                            title = eBookInfo.title,
-                                            libName = eBookInfo.eBookLibName,
-                                            thumbnail = eBookInfo.thumbnail,
-                                            bookId = eBookInfo.id,
-                                            lentKey = eBookInfo.lentKey,
-                                            comKey = eBookInfo.lentKey,
-                                            isbn = eBookInfo.isbn,
-                                            fileType = "EPUB",
-                                            drmInfo = "",
-                                            drm = eBookInfo.comCode,
-                                            downloadYn = "Y",
-                                            returnDate = eBookInfo.lendingExpiredDate,
-                                            useStartTime = eBookInfo.useStartTime,
-                                            useEndTime = eBookInfo.useEndTime
-                                    )
-                            )
-                        }
-                        withContext(IO) {
-                            ViewerDBFacade(activity).insertOrUpdateBook(
-                                    eBookInfo.lentKey,
-                                    "${LibrosUtil.getEPUBRootPath(activity).toString()}/${activity.applicationContext.getString(R.string.sdcard_dir_name)}/$fileName/${fileName.substring(0, fileName.indexOf(".epub"))}",
-                                    null)
-                        }
-                        showMsgDialog("알림", "다운로드 되었습니다.", "확인", eBookInfo.lentKey)
+//                        withContext(IO) {
+//                            EbookDownloadDBFacade(activity).insertData(
+//                                    ebook = EbookListVO(
+//                                            fileName = fileName,
+//                                            libCode = eBookInfo.libCode,
+//                                            title = eBookInfo.title,
+//                                            libName = eBookInfo.eBookLibName,
+//                                            thumbnail = eBookInfo.thumbnail,
+//                                            bookId = eBookInfo.id,
+//                                            lentKey = eBookInfo.lentKey,
+//                                            comKey = eBookInfo.lentKey,
+//                                            isbn = eBookInfo.isbn,
+//                                            fileType = "EPUB",
+//                                            drmInfo = "",
+//                                            drm = eBookInfo.comCode,
+//                                            downloadYn = "Y",
+//                                            returnDate = eBookInfo.lendingExpiredDate,
+//                                            useStartTime = eBookInfo.useStartTime,
+//                                            useEndTime = eBookInfo.useEndTime
+//                                    )
+//                            )
+//                        }
+//                        withContext(IO) {
+//                            ViewerDBFacade(activity).insertOrUpdateBook(
+//                                    eBookInfo.lentKey,
+//                                    "${LibrosUtil.getEPUBRootPath(activity).toString()}/${activity.applicationContext.getString(R.string.sdcard_dir_name)}/$fileName/${fileName.substring(0, fileName.indexOf(".epub"))}",
+//                                    null)
+//                        }
+                        val subFileName = fileName.substring(0, fileName.indexOf(".epub"))
+                        val path = "${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}/${fileName}"
+                        Log.d("test",path)
+                        Log.d("test file Name ", fileName)
+                        Log.d("test file ePubId ", eBookInfo.ePubId.toString())
+                        Log.d("test file libName ", eBookInfo.eBookLibName)
+                        decryptYES24(fileName, eBookInfo.ePubId.toString(), eBookInfo.eBookLibName.toString(), null)
+
+                        val zipFile = CompressZip().compress("$path/$subFileName", path, subFileName)
+
+//                        runBlocking {
+//                            val mSocket = (activity as MainActivity).mSocket
+//                            LibrosUpload().upload(eBookInfo.uploadUrl, zipFile, eBookInfo, mSocket)
+//                        }
+//                        val deleteFile: File = File(path)
+////
+//                        if (deleteFile != null && deleteFile.exists()) {
+//                            FileManager().deleteFolder(deleteFile)
+//                        }
+
+//                        showMsgDialog("알림", "다운로드 되었습니다.", "확인", eBookInfo.lentKey)
                     } else {
                         LibrosUtil.showMsgWindow(
                                 activity = activity,
@@ -142,6 +164,17 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                             msg = "다운로드 되지 않았습니다.",
                             btnMsg = "확인"
                     )
+                }
+                if (progressBar.isAdded) {
+                    try {
+                        progressBar.dismissAllowingStateLoss()
+                    } catch (e: WindowManager.BadTokenException) {
+                        // TODO: handle exception
+                        Log.e("error", e.message.toString())
+                    } catch (e: IllegalArgumentException) {
+                        // TODO: handle exception
+                        Log.e("error", e.message.toString())
+                    }
                 }
             }
         }
@@ -183,5 +216,90 @@ class EBookImageDrmYES24Task(_activity: Activity) {
 //		} catch (Exception e) {
 //			//not handle
 //		}
+    }
+
+    private fun decryptYES24(fileName: String, g_userId: String, g_passwd: String, filePath: String?): Boolean {
+        var isSuccessDownLoad = false
+
+        var sdCardDirName = ""
+
+        if (filePath != null && filePath.trim().isNotEmpty()) {
+            sdCardDirName = filePath
+        } else {
+            sdCardDirName = activity.resources.getString(R.string.sdcard_dir_name)
+        }
+
+        var folderName = fileName
+        var eBookFileFolderName = "${LibrosUtil.getEPUBRootPath(activity)}/$sdCardDirName/"
+        var extractFileName = fileName
+
+        if (fileName.contains(".epub")) {
+            val index = fileName.indexOf(".epub")
+            extractFileName = fileName.substring(0, index)
+        }
+
+        val extractFileDir = File(eBookFileFolderName, "$folderName/$extractFileName")
+
+        if (!extractFileDir.exists()) {
+            val res = extractFileDir.mkdir()
+            if (!res) throw java.lang.RuntimeException("mkdir failed : " + extractFileDir.path)
+        } else {
+            return true
+        }
+
+        val nomediaFile = File(extractFileDir.absolutePath, ".nomedia")
+        if (!nomediaFile.exists()) {
+            nomediaFile.createNewFile()
+        }
+
+        val oriFile: File = File(eBookFileFolderName, "$folderName/$fileName")
+
+        AndroidZipUtil4IDS.decompressFile(oriFile, extractFileDir)
+
+
+        //FileManager.deleteFiles(oriFile);
+        val apiTest = IDSClientDecrypt(activity, sdCardDirName, fileName, g_userId, g_passwd)
+
+        val parserFactory = SAXParserFactory.newInstance()
+        val saxParser = parserFactory.newSAXParser()
+        val reader = saxParser.xmlReader
+
+        val rootFile = File(extractFileDir.absolutePath + "/META-INF", "container.xml")
+
+        if (rootFile.exists()) {
+            val metaXmlHandler = MetaXMLHandler()
+            reader.contentHandler = metaXmlHandler
+            reader.parse(InputSource(InputStreamReader(FileInputStream(rootFile))))
+            val opfPath: String = metaXmlHandler.opfPath
+
+            if (opfPath != null) {
+                val folderIndex = opfPath.indexOf("/")
+                val mainFolderName = opfPath.substring(0, folderIndex)
+                val opfFile = File(extractFileDir.absolutePath, opfPath)
+
+                if (opfFile.exists()) {
+                    val imageXmlHandler = ImageXMLHandler()
+                    reader.contentHandler = imageXmlHandler
+                    reader.parse(InputSource(InputStreamReader(FileInputStream(opfFile))))
+
+                    val imageFilesName: ArrayList<String> = imageXmlHandler.imagesPath
+                    val x = 95.0 / imageFilesName.size
+                    var totalCount = 0.0
+
+                    for (j in imageFilesName.indices) {
+                        val decryptedImage = apiTest.getDecryptedContent(null, mainFolderName + "/" + imageFilesName[j])
+
+                        if (decryptedImage != null && decryptedImage.isNotEmpty()) {
+                            FileManager().writeFile(decryptedImage, extractFileDir.absolutePath + "/" + mainFolderName + "/" + imageFilesName[j])
+                        }
+
+                        totalCount += x
+                    }
+                    isSuccessDownLoad = true
+                }
+            }
+        }
+
+        return isSuccessDownLoad
     }
 }

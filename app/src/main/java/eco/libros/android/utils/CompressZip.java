@@ -151,8 +151,8 @@ public class CompressZip {
     }
 
     public File renameFileOne(String path, String originFileName, String newFileName){
-        File originFile = new File(path+ "/" +originFileName);
-        File newFile = new File(path+"/"+newFileName);
+        File originFile = new File(path+ "/" + originFileName);
+        File newFile = new File(path+"/" + newFileName);
         Log.d("test rename ", "origin : " + path + originFileName +", new File : " + path + newFileName);
         if (originFile == null){
             System.out.println("originFile error");

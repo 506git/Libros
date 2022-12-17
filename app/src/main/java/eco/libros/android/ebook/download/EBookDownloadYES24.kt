@@ -763,7 +763,7 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
 
             nowFileCount++
 
-            Log.d("TESTCOUNT", nowFileCount.toString())
+//            Log.d("TESTCOUNT", nowFileCount.toString())
         }
     }
 
