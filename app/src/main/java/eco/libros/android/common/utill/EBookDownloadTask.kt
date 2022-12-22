@@ -31,7 +31,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         val comCode = ebookData.comCode
         val returnObj = kotlin.arrayOfNulls<Any>(5)
         var fileName: String? = null
-
         if (ebookLibName.isEmpty()) {
             return null
         }
@@ -93,17 +92,20 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
                         "YES24" -> {
                             val libCode = ebookData.libCode
+//                            val userInfo = UserLibListDBFacade(myActivity).getCertifyInfo(libCode)
+
                             val userInfo = UserLibListDBFacade(myActivity).getCertifyInfo(libCode)
+//                            if (userInfo?.eBookId == null || userInfo.eBookId.trim()
+//                                    .isEmpty() || userInfo.eBookPw.trim().isEmpty()
+//                            ) {
+//                                return@withContext null
+//                            }
 
-                            if (userInfo?.eBookId == null || userInfo.eBookId.trim()
-                                    .isEmpty() || userInfo.eBookPw.trim().isEmpty()
-                            ) {
-                                return@withContext null
-                            }
-
-                            val ebookUserId = userInfo.eBookId
-                            val ebookUserPw = userInfo.eBookPw
-
+//                            val ebookUserId = userInfo.eBookId
+//                            val ebookUserPw = userInfo.eBookPw
+                            val ebookUserId = "ecotest"
+                            val ebookUserPw = "ecotest"
+                            Log.d("test","stepp1")
                             val downYes24 = EBookDownloadYES24(
                                 mActivity,
                                 mActivity.resources.getString(R.string.sdcard_dir_name),
@@ -282,7 +284,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
     init {
         mActivity = _activity
         ebookData = _ebookData
-        ebookLibName = ebookData.libName
+        ebookLibName = ebookData.eBookLibName
         downloadPlace = _downloadPlace
         myActivity = mActivity as FragmentActivity
     }

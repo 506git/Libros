@@ -104,7 +104,7 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
         // TODO: check this !!
         task = _task
         task.progressTask(1)
-
+        Log.d("test","stepp2")
         val deviceType: Int = DRMConstants.SYSTYPE_PORTABLE_ANDROID
         val deviceInfo: String
 

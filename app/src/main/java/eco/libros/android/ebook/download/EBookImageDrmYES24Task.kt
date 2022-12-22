@@ -98,7 +98,7 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                                             fileName = fileName,
                                             libCode = eBookInfo.libCode,
                                             title = eBookInfo.title,
-                                            libName = eBookInfo.libName,
+                                            libName = eBookInfo.eBookLibName,
                                             thumbnail = eBookInfo.thumbnail,
                                             bookId = eBookInfo.id,
                                             lentKey = eBookInfo.lentKey,
