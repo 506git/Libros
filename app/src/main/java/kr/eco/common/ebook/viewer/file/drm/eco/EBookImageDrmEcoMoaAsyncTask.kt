@@ -95,7 +95,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                 obj[3] = drmLicence
 
             }
-            Log.d("TESTOBJ", obj.toString())
+
             if (progressBar.isAdded) {
                 try {
                     progressBar.dismissAllowingStateLoss()
@@ -122,7 +122,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                                     fileName = fileName,
                                     libCode = eBookData.libCode,
                                     title = eBookData.title,
-                                    libName = eBookData.libName,
+                                    libName = eBookData.eBookLibName,
                                     thumbnail = eBookData.thumbnail,
                                     bookId = eBookData.id,
                                     lentKey = eBookData.lentKey,

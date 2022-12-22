@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
+import eco.libros.android.LibrosUtils
 import eco.libros.android.common.database.ViewerDBFacade
-import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.ebook.download.FileManager
 import kr.co.smartandwise.eco_epub3_module.Activity.EpubViewerActivity
 import java.io.File
@@ -32,7 +32,8 @@ class EpubViewer : EpubViewerActivity() {
         id = if (intent.hasExtra("id")) {
             intent.getStringExtra("id")
         } else
-            LibrosUtil.getUserId(this, true, needEncrypt = false)
+            "hajieun@eco.co.kr"
+//            LibrosUtil.getUserId(this, true, needEncrypt = false)
         if (intent.hasExtra("pw")) {
             pw = intent.getStringExtra("pw")
         }
@@ -127,7 +128,7 @@ class EpubViewer : EpubViewerActivity() {
         ) {
             val fileDir =
                 File(
-                    "${LibrosUtil.getEPUBRootPath(this)}/$filePath/${this.intent.getStringExtra("epubFileName")!!}/${
+                    "${LibrosUtils.getEPUBRootPath(this)}/$filePath/${this.intent.getStringExtra("epubFileName")!!}/${
                         this.intent.getStringExtra(
                             "epubFileName"
                         )!!.split("\\.")[0]

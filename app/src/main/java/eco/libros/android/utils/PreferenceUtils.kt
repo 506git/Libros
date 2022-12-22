@@ -2,6 +2,7 @@ package eco.libros.android.utils
 
 import android.Manifest
 import android.accounts.AccountManager
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -19,14 +20,22 @@ import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 import java.net.URLEncoder
 
-object PreferenceUtils {
+class PreferenceUtils (mContext: Context) {
 
     private var preferences: SharedPreferences? = null
 
+    init {
+        context = mContext
+    }
+    companion object{
+        @SuppressLint("StaticFieldLeak")
+        private lateinit var context:Context
+    }
+
     private fun getPreferences(): SharedPreferences? {
-        preferences = PreferenceManager.getDefaultSharedPreferences(App.appContext)
+        preferences = PreferenceManager.getDefaultSharedPreferences(context)
         if (preferences == null) {
-            preferences = PreferenceManager.getDefaultSharedPreferences(App.appContext)
+            preferences = PreferenceManager.getDefaultSharedPreferences(context)
         }
 
         return preferences
@@ -59,25 +68,30 @@ object PreferenceUtils {
         var userId = userId
         if (userId != null && userId.trim { it <= ' ' }.length != 0) {
             userId = Cryptchar.encrypt(
-                PreferenceUtils.getOriginDeviceIdOLD(context), userId
+                PreferenceUtils(context).getOriginDeviceIdOLD(context), userId
             )
         }
-        PreferenceUtils.setSharedData(context, context.resources.getString(R.string.libros_login_id), userId)
+        PreferenceUtils(context).setSharedData(
+            context,
+            context.resources.getString(R.string.libros_login_id),
+            userId
+        )
     }
 
     fun getUserId(context: Context, needEncoding: Boolean, needEncrypt: Boolean): String? {
-        var userId: String? = getSharedData(context, context.resources.getString(R.string.libros_login_id))
+        var userId: String? =
+            getSharedData(context, context.resources.getString(R.string.libros_login_id))
         if (userId != null && userId.trim { it <= ' ' }.isNotEmpty()) {
-            userId = Cryptchar.decrypt(PreferenceUtils.getOriginDeviceIdOLD(context), userId)
+            userId = Cryptchar.decrypt(PreferenceUtils(context).getOriginDeviceIdOLD(context), userId)
             if (!needEncoding) {
                 userId = try {
                     URLDecoder.decode(userId, "utf-8")
                 } catch (e: UnsupportedEncodingException) {
                     // TODO Auto-generated catch block
-                        Log.d("teste",e.toString())
+                    Log.d("teste", e.toString())
                     return userId
                 } catch (e: Exception) {
-                    Log.d("teste2",e.toString())
+                    Log.d("teste2", e.toString())
                     // TODO Auto-generated catch block
                     return userId
                 }

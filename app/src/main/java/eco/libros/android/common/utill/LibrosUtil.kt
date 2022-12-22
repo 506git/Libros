@@ -4,32 +4,19 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Build
-import android.os.Bundle
 import android.provider.Settings.Secure
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager.BadTokenException
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import eco.libros.android.R
 import eco.libros.android.common.crypt.Cryptchar
 import eco.libros.android.common.crypt.PasswordCrypt
-import eco.libros.android.common.database.EbookDownloadDBFacade
 import eco.libros.android.common.database.UserLibListDBFacade
-import eco.libros.android.common.dialog.CustomAuthDialog
-import eco.libros.android.common.dialog.CustomMsgDialogFragment
 import eco.libros.android.common.model.LibraryMenuListDataVo
 import eco.libros.android.common.model.UserLibListDataVO
-import eco.libros.android.login.LogInSettingActivity
-import eco.libros.android.mobileCard.MobileCardFragment
-import eco.libros.android.mobileCard.MobileLoginCardFragment
-import eco.libros.android.settings.SettingsMainActivity
-import eco.libros.android.ui.IntroActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
@@ -321,86 +308,86 @@ object LibrosUtil {
         return userPw
     }
 
-    fun showLogoutMsg(activity: Activity?, cancel: Boolean) {
-        val context: Context = activity!!.applicationContext
-        try {
-            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(activity)
-            alertDialog.setTitle("알림")
-                    .setMessage("로그아웃 하시겠습니까?")
-                    .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, _ ->
-                        dialog.dismiss()
-                        Log.d("TEST!!", "TEST!!!")
-//                        delUserId(context, context.resources.getString(R.string.libros_login_id))
-                        delUserId(context, context.resources.getString(R.string.libros_login_pw))
-                        SettingsMainActivity().finish()
-                        Intent(activity, IntroActivity::class.java).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                            startActivity(context, this, null)
-                        }
-                    })
-                    .setCancelable(cancel)
-                    .create().show()
+//    fun showLogoutMsg(activity: Activity?, cancel: Boolean) {
+//        val context: Context = activity!!.applicationContext
+//        try {
+//            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(activity)
+//            alertDialog.setTitle("알림")
+//                    .setMessage("로그아웃 하시겠습니까?")
+//                    .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, _ ->
+//                        dialog.dismiss()
+//                        Log.d("TEST!!", "TEST!!!")
+////                        delUserId(context, context.resources.getString(R.string.libros_login_id))
+//                        delUserId(context, context.resources.getString(R.string.libros_login_pw))
+//                        SettingsMainActivity().finish()
+//                        Intent(activity, IntroActivity::class.java).apply {
+//                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                            startActivity(context, this, null)
+//                        }
+//                    })
+//                    .setCancelable(cancel)
+//                    .create().show()
+//
+//        } catch (e: BadTokenException) {
+//            LibrosLog.print(e.message.toString())
+//        } catch (e: java.lang.IllegalArgumentException) {
+//            LibrosLog.print(e.message.toString())
+//        }
+//    }
+//
+//    fun logoutTask(activity: Activity?) {
+//        val context: Context = activity!!.applicationContext
+//        try {
+//            delUserId(context, context.resources.getString(R.string.libros_login_id))
+//            delUserId(context, context.resources.getString(R.string.libros_login_pw))
+//            EbookDownloadDBFacade(context).deleteEBookDB()
+//            UserLibListDBFacade(context).deleteLibDB()
+//            activity.finish()
+//            Intent(activity, LogInSettingActivity::class.java).apply {
+//                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                startActivity(context, this, null)
+//            }
+//        } catch (e: java.lang.IllegalArgumentException) {
+//            LibrosLog.print(e.message.toString())
+//        }
+//    }
 
-        } catch (e: BadTokenException) {
-            LibrosLog.print(e.message.toString())
-        } catch (e: java.lang.IllegalArgumentException) {
-            LibrosLog.print(e.message.toString())
-        }
-    }
+//    fun showMsgDialog(context: FragmentManager, title: String, msg: String) {
+//        val customMsgDialogFragment: CustomMsgDialogFragment =
+//                CustomMsgDialogFragment.newInstance(title, msg)
+//        customMsgDialogFragment.show(context, "customDialog")
+//    }
+//
+//    fun showMsgCustomDialog(context: FragmentManager, title: String, msg: String, button: String) {
+//        val customMsgDialogFragment: CustomMsgDialogFragment =
+//                CustomMsgDialogFragment.newInstance(title, msg, button)
+//        customMsgDialogFragment.show(context, "customDialog")
+//    }
 
-    fun logoutTask(activity: Activity?) {
-        val context: Context = activity!!.applicationContext
-        try {
-            delUserId(context, context.resources.getString(R.string.libros_login_id))
-            delUserId(context, context.resources.getString(R.string.libros_login_pw))
-            EbookDownloadDBFacade(context).deleteEBookDB()
-            UserLibListDBFacade(context).deleteLibDB()
-            activity.finish()
-            Intent(activity, LogInSettingActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                startActivity(context, this, null)
-            }
-        } catch (e: java.lang.IllegalArgumentException) {
-            LibrosLog.print(e.message.toString())
-        }
-    }
-
-    fun showMsgDialog(context: FragmentManager, title: String, msg: String) {
-        val customMsgDialogFragment: CustomMsgDialogFragment =
-                CustomMsgDialogFragment.newInstance(title, msg)
-        customMsgDialogFragment.show(context, "customDialog")
-    }
-
-    fun showMsgCustomDialog(context: FragmentManager, title: String, msg: String, button: String) {
-        val customMsgDialogFragment: CustomMsgDialogFragment =
-                CustomMsgDialogFragment.newInstance(title, msg, button)
-        customMsgDialogFragment.show(context, "customDialog")
-    }
-
-    fun showAuthDialog(
-        context: FragmentManager,
-        userName: String?,
-        userNo: String?,
-        userPw: String?,
-        certifyKind: String?
-    ) {
-        val customAuthDialog: CustomAuthDialog =
-                if (certifyKind.equals("LOANNOCARD")) {
-                    CustomAuthDialog.newInstance(
-                        userName!!,
-                        userNo!!,
-                        userPw!!,
-                        certifyKind.toString()
-                    )
-                } else {
-                    CustomAuthDialog.newInstance(
-                        userName!!,
-                        userNo!!,
-                        certifyKind.toString()
-                    )
-                }
-        customAuthDialog.show(context, "auth_dialog")
-    }
+//    fun showAuthDialog(
+//        context: FragmentManager,
+//        userName: String?,
+//        userNo: String?,
+//        userPw: String?,
+//        certifyKind: String?
+//    ) {
+//        val customAuthDialog: CustomAuthDialog =
+//                if (certifyKind.equals("LOANNOCARD")) {
+//                    CustomAuthDialog.newInstance(
+//                        userName!!,
+//                        userNo!!,
+//                        userPw!!,
+//                        certifyKind.toString()
+//                    )
+//                } else {
+//                    CustomAuthDialog.newInstance(
+//                        userName!!,
+//                        userNo!!,
+//                        certifyKind.toString()
+//                    )
+//                }
+//        customAuthDialog.show(context, "auth_dialog")
+//    }
 
     fun getLibName(context: Context, libCode: String?): String {
         val userLastLibCode = LibrosUtil.getLibCode(context).toString()
@@ -454,42 +441,42 @@ object LibrosUtil {
     }
 
 
-    fun showMobileCard(activity: FragmentActivity, mContext: Context){
-        var libCode = getLibCode(mContext).toString()
-        if (TextUtils.isEmpty(libCode.trim())){
-            libCode = "128040"
-        }
-        libCode = "128040"
-        Log.d("TESTUSERINFO",libCode)
-        val certifyKind : String = UserLibListDBFacade(mContext).getCertifyKind(libCode)
-
-        val userInfo = UserLibListDBFacade(mContext).getCertifyInfo(libCode)
-
-//        Log.d("TESTUSERINFO",userInfo!!.libraryUserId)
-        if(!TextUtils.isEmpty(certifyKind)) {
-            val mobileCardFragment: BottomSheetDialogFragment =
-                if (TextUtils.isEmpty(userInfo?.libraryUserId)) {
-                    MobileLoginCardFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("certifyKind", certifyKind)
-                        }
-                    }
-                    //                mobileCardFragment.show(supportFragmentManager,"mobile_card")
-                } else {
-                    MobileCardFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("userId", userInfo?.libraryUserId)
-                            putString("libCode", libCode)
-                            putString("userLibNo", userInfo?.libraryUserNo)
-                            putString("certifyKind", certifyKind)
-                        }
-                    }
-                }
-            mobileCardFragment.show(activity.supportFragmentManager, "mobile_card")
-        }else{
-            LibrosUtil.showMsgCustomDialog(activity.supportFragmentManager,"알림","해당 도서관에서는 스마트 회원증을 이용할 수 없습니다.","확인")
-        }
-    }
+//    fun showMobileCard(activity: FragmentActivity, mContext: Context){
+//        var libCode = getLibCode(mContext).toString()
+//        if (TextUtils.isEmpty(libCode.trim())){
+//            libCode = "128040"
+//        }
+//        libCode = "128040"
+//        Log.d("TESTUSERINFO",libCode)
+//        val certifyKind : String = UserLibListDBFacade(mContext).getCertifyKind(libCode)
+//
+//        val userInfo = UserLibListDBFacade(mContext).getCertifyInfo(libCode)
+//
+////        Log.d("TESTUSERINFO",userInfo!!.libraryUserId)
+//        if(!TextUtils.isEmpty(certifyKind)) {
+//            val mobileCardFragment: BottomSheetDialogFragment =
+//                if (TextUtils.isEmpty(userInfo?.libraryUserId)) {
+//                    MobileLoginCardFragment().apply {
+//                        arguments = Bundle().apply {
+//                            putString("certifyKind", certifyKind)
+//                        }
+//                    }
+//                    //                mobileCardFragment.show(supportFragmentManager,"mobile_card")
+//                } else {
+//                    MobileCardFragment().apply {
+//                        arguments = Bundle().apply {
+//                            putString("userId", userInfo?.libraryUserId)
+//                            putString("libCode", libCode)
+//                            putString("userLibNo", userInfo?.libraryUserNo)
+//                            putString("certifyKind", certifyKind)
+//                        }
+//                    }
+//                }
+//            mobileCardFragment.show(activity.supportFragmentManager, "mobile_card")
+//        }else{
+//            LibrosUtil.showMsgCustomDialog(activity.supportFragmentManager,"알림","해당 도서관에서는 스마트 회원증을 이용할 수 없습니다.","확인")
+//        }
+//    }
     suspend fun getLibMenuList(mContext: Context, data: String): JSONObject {
         return withContext(IO) {
             val libCode = JSONObject(data).getString("libCode")
@@ -542,14 +529,14 @@ object LibrosUtil {
         return obj
     }
 
-    fun showLoginWindow(activity: FragmentManager, libCode: String?, certifyKind: String) {
-        val customAuthDialog: CustomAuthDialog =CustomAuthDialog.newInstance(
-            "",
-            "",
-            certifyKind.toString()
-        )
-        customAuthDialog.show(activity, "auth_dialog")
-    }
+//    fun showLoginWindow(activity: FragmentManager, libCode: String?, certifyKind: String) {
+//        val customAuthDialog: CustomAuthDialog =CustomAuthDialog.newInstance(
+//            "",
+//            "",
+//            certifyKind.toString()
+//        )
+//        customAuthDialog.show(activity, "auth_dialog")
+//    }
 
     fun getUserLibNo(context: Context, libCode: String?): String {
         var userInfo = ""

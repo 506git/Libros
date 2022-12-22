@@ -10,17 +10,12 @@
         android:name="android.permission.GET_ACCOUNTS"
         android:maxSdkVersion="22" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -47,121 +42,19 @@
         tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode"
         tools:replace="android:allowBackup"
         tools:targetApi="m">
-        <activity android:name=".home.fragment.HomeWebViewActivity" />
-        <activity android:name=".common.ErrorActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
-        <activity
-            android:name=".nfc.NFCActivity"
-            android:label="nfc 태그 인식"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".settings.SettingsMainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_settings_main"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".mobileCard.BarcodeDetailActivity" />
-        <activity
-            android:name=".push.PushDialogActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="unspecified"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
-        <service
-            android:name=".push.FCMMessageService"
-            android:directBootAware="true"
-            android:enabled="true"
-            android:exported="false"
-            tools:targetApi="n">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
-        <meta-data
-            android:name="firebase_messaging_auto_init_enabled"
-            android:value="false" />
-        <meta-data
-            android:name="firebase_analytics_collection_enabled"
-            android:value="false" /> <!-- <meta-data -->
-        <activity android:name=".login.AcceptDetailActivity" />
-        <activity
-            android:name=".ui.LogInMainActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:screenOrientation="sensorPortrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
-        <activity android:name=".login.LogInSettingActivity" />
-        <activity android:name=".ui.TestActivity" />
-        <activity
-            android:name=".ui.IntroActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pdf"
-                    android:scheme="http" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pdf"
-                    android:scheme="https" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pdf"
-                    android:scheme="content" />
-                <data
-                    android:host="*"
-                    android:mimeType="*/*"
-                    android:pathPattern=".*\\.pdf"
-                    android:scheme="file" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/pdf" />
-                <data android:mimeType="application/x-pdf" />
-                <data
-                    android:mimeType="application/octet-stream"
-                    android:scheme="content" />
-                <data
-                    android:mimeType="application/zip"
-                    android:scheme="content" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:screenOrientation="sensorPortrait" >
-            <intent-filter android:autoVerify="true">
-                <data
-                    android:host="librostest.eco.co.kr"
-                    android:path="/ebook"
-                    android:scheme="https"
-                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -172,26 +65,6 @@
             android:name="com.mackerly.eco.epubviewer2module.ui.EpubViewerActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".ui.SangSangActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="eco.libros.android.action.SANG_SANG" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWABLE" />
-
-                <data
-                    android:host="@string/sangsang_host"
-                    android:scheme="@string/sangsang_scheme" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="sensorPortrait"
