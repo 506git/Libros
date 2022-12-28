@@ -18,6 +18,7 @@ import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
 import eco.libros.android.ebook.download.FileManager
 import eco.libros.android.myContents.MyEbookListModel
+import eco.libros.android.utils.CompressZip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -117,32 +118,42 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                 if (successResult) {
                     if (fileName != null) {
                         withContext(IO) {
-                            EbookDownloadDBFacade(mActivity).insertData(
-                                ebook = EbookListVO(
-                                    fileName = fileName,
-                                    libCode = eBookData.libCode,
-                                    title = eBookData.title,
-                                    libName = eBookData.eBookLibName,
-                                    thumbnail = eBookData.thumbnail,
-                                    bookId = eBookData.id,
-                                    lentKey = eBookData.lentKey,
-                                    comKey = eBookData.lentKey,
-                                    isbn = eBookData.isbn,
-                                    fileType = "EPUB",
-                                    drmInfo = drmLicense,
-                                    drm = eBookData.comCode,
-                                    downloadYn = "Y",
-                                    returnDate = eBookData.lendingExpiredDate,
-                                    useStartTime = eBookData.useStartTime,
-                                    useEndTime = eBookData.useEndTime
-                                )
-                            )
+//                            EbookDownloadDBFacade(mActivity).insertData(
+//                                ebook = EbookListVO(
+//                                    fileName = fileName,
+//                                    libCode = eBookData.libCode,
+//                                    title = eBookData.title,
+//                                    libName = eBookData.eBookLibName,
+//                                    thumbnail = eBookData.thumbnail,
+//                                    bookId = eBookData.id,
+//                                    lentKey = eBookData.lentKey,
+//                                    comKey = eBookData.lentKey,
+//                                    isbn = eBookData.isbn,
+//                                    fileType = "EPUB",
+//                                    drmInfo = drmLicense,
+//                                    drm = eBookData.comCode,
+//                                    downloadYn = "Y",
+//                                    returnDate = eBookData.lendingExpiredDate,
+//                                    useStartTime = eBookData.useStartTime,
+//                                    useEndTime = eBookData.useEndTime
+//                                )
+//                            )
                         }
+
                         withContext(IO){
                             ViewerDBFacade(mActivity).insertOrUpdateBook(
                                 eBookData.lentKey,"${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.resources.getString(R.string.sdcard_dir_name)}/${fileName}/${fileName}",null
                             )
                         }
+                        val file = arrayOfNulls<String?>(1)
+
+                        // Type the path of the files in here
+
+                        val path = "${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.resources.getString(R.string.sdcard_dir_name)}/${fileName}"
+//                        file[0] = "$path/$fileName"
+//                        FileManager().zipFolder("$path/$fileName","$path/ziptest.zip")
+//                        FileManager().zipFile(file, "$path/$fileName/zipTest.zip")
+                        CompressZip().compress("$path/$fileName", path,fileName)
                         showMsgDialog("알림", "다운로드 되었습니다.", "확인",eBookData.lentKey)
                     } else {
                         LibrosUtil.showMsgWindow(

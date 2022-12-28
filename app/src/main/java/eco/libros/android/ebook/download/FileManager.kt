@@ -16,12 +16,16 @@ import java.io.*
 import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 
 class FileManager {
-
+    private val BUFFER = 80000
+    private val BUFFER_SIZE = 1024 * 2
+    private val COMPRESSION_LEVEL = 8
     init {
         //load key gen, load first needed
         System.loadLibrary("xsync-keygen")
+//        private static final int BUFFER = 80000;
     }
 
     fun unzip(activity: Activity, zipFile: File, url: String?, uuid: String, task: CustomProgressFragment): String? {
@@ -615,5 +619,98 @@ class FileManager {
             LibrosLog.print(e.toString())
         }
         return buf
+    }
+
+    fun zipFile(_files: Array<String?>, zipFileName: String?) {
+        try {
+            var origin: BufferedInputStream? = null
+            val dest = FileOutputStream(zipFileName)
+            val out = ZipOutputStream(
+                BufferedOutputStream(
+                    dest
+                )
+            )
+            val data = ByteArray(BUFFER)
+            for (i in _files.indices) {
+                Log.v("Compress", "Adding: " + _files[i])
+                val fi = FileInputStream(_files[i])
+                origin = BufferedInputStream(fi, BUFFER)
+                val entry = ZipEntry(_files[i]?.substring(_files[i]?.lastIndexOf("/")!! + 1))
+                out.putNextEntry(entry)
+                var count: Int
+                while (origin.read(data, 0, BUFFER).also { count = it } != -1) {
+                    out.write(data, 0, count)
+                }
+                origin.close()
+            }
+            out.close()
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @Throws(java.lang.Exception::class)
+    fun zipFolder(inputFolderPath: String?, outZipPath: String?) {
+        // 압축 대상(sourcePath)이 디렉토리나 파일이 아니면 리턴한다.
+        val sourceFile = File(inputFolderPath)
+        if (!sourceFile.isFile && !sourceFile.isDirectory) {
+            throw java.lang.Exception("압축 대상의 파일을 찾을 수가 없습니다.")
+        }
+        var fos: FileOutputStream? = null
+        var bos: BufferedOutputStream? = null
+        var zos: ZipOutputStream? = null
+        try {
+            fos = FileOutputStream(outZipPath) // FileOutputStream
+            bos = BufferedOutputStream(fos) // BufferedStream
+            zos = ZipOutputStream(bos) // ZipOutputStream
+            zos.setLevel(COMPRESSION_LEVEL) // 압축 레벨 - 최대 압축률은 9, 디폴트 8
+            zipEntry(sourceFile, inputFolderPath, zos) // Zip 파일 생성
+            zos.finish() // ZipOutputStream finish
+        } finally {
+            zos?.close()
+            bos?.close()
+            fos?.close()
+        }
+    }
+
+    @Throws(java.lang.Exception::class)
+    fun zipEntry(sourceFile: File, sourcePath: String?, zos: ZipOutputStream) {
+        // sourceFile 이 디렉토리인 경우 하위 파일 리스트 가져와 재귀호출
+        if (sourceFile.isDirectory) {
+            if (sourceFile.name.equals(".metadata", ignoreCase = true)) { // .metadata 디렉토리 return
+                return
+            }
+            val fileArray = sourceFile.listFiles() // sourceFile 의 하위 파일 리스트
+            for (i in fileArray.indices) {
+                zipEntry(fileArray[i], sourcePath, zos) // 재귀 호출
+            }
+
+        } else { // sourcehFile 이 디렉토리가 아닌 경우
+            var bis: BufferedInputStream? = null
+            try {
+                val sFilePath = sourceFile.path
+                Log.i("aa", sFilePath)
+                //String zipEntryName = sFilePath.substring(sourcePath.length() + 1, sFilePath.length());
+                val tok = StringTokenizer(sFilePath, "/")
+                var tok_len = tok.countTokens()
+                var zipEntryName: String? = tok.toString()
+                while (tok_len != 0) {
+                    tok_len--
+                    zipEntryName = tok.nextToken()
+                }
+                bis = BufferedInputStream(FileInputStream(sourceFile))
+                val zentry = ZipEntry(zipEntryName)
+                zentry.time = sourceFile.lastModified()
+                zos.putNextEntry(zentry)
+                val buffer = ByteArray(BUFFER_SIZE)
+                var cnt = 0
+                while (bis.read(buffer, 0, BUFFER_SIZE).also { cnt = it } != -1) {
+                    zos.write(buffer, 0, cnt)
+                }
+                zos.closeEntry()
+            } finally {
+                bis?.close()
+            }
+        }
     }
 }

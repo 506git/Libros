@@ -114,6 +114,7 @@ class EBookDownloadECOMoa {
             // 자세한 부분은, 아래 Use_AsynTask 에서 확인
 
             fileName = FileManager().unzip(activity, file, fileName, uuid, task)
+
             Log.d("TESTFILENAME", fileName!!)
         } catch (e: Exception) {
             LibrosLog.print(e.toString() + "down")

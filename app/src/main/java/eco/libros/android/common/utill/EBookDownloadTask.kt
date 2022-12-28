@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import android.view.WindowManager
+import android.widget.ProgressBar
 import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
@@ -31,6 +32,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         val comCode = ebookData.comCode
         val returnObj = kotlin.arrayOfNulls<Any>(5)
         var fileName: String? = null
+//        var progress = mActivity.findViewById<ProgressBar>(R.id.progress)
         if (ebookLibName.isEmpty()) {
             return null
         }
@@ -101,11 +103,10 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 //                                return@withContext null
 //                            }
 
-//                            val ebookUserId = userInfo.eBookId
-//                            val ebookUserPw = userInfo.eBookPw
-                            val ebookUserId = "ecotest"
-                            val ebookUserPw = "ecotest"
-                            Log.d("test","stepp1")
+                            val ebookUserId = userInfo?.eBookId
+                            val ebookUserPw = userInfo?.eBookPw
+//                            val ebookUserId = "ecotest"
+//                            val ebookUserPw = "ecotest"
                             val downYes24 = EBookDownloadYES24(
                                 mActivity,
                                 mActivity.resources.getString(R.string.sdcard_dir_name),

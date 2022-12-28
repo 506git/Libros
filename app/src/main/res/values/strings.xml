@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">리브로스</string>
+    <string name="app_name">리브로스_전자책</string>
 
     <string name="user_agent">LibrosApp</string>
     <string name="file_provider_authority">eco.libros.android.fileprovider</string>
