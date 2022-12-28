@@ -87,8 +87,8 @@ class CustomProgressFragment : DialogFragment() {
 
     fun progressTask(num: Int) {
         CoroutineScope(Dispatchers.Main).launch {
-            mSocket?.emit("working_status", "${num*10}")
-            dialog?.findViewById<ProgressBar>(R.id.progressBar)?.smoothProgress(num*10)
+            mSocket?.emit("working_status", "$num")
+            dialog?.findViewById<ProgressBar>(R.id.progressBar)?.smoothProgress(num)
             dialog?.findViewById<TextView>(R.id.msg)?.text = "${msg}.. $num%"
         }
     }

@@ -9,6 +9,7 @@ import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
+import eco.libros.android.ui.MainActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.withContext
@@ -32,6 +33,10 @@ class EBookDownloadECOMoa {
         var makeDir: Boolean = false
         var dir: File = File(filePath)
 
+        val mSocket = (activity as MainActivity).mSocket
+
+
+        mSocket?.emit("working_status", "0")
         makeDir = if (!dir.exists())
             dir.mkdir()
         else
@@ -74,7 +79,7 @@ class EBookDownloadECOMoa {
 
             if (errCode.toInt() == 0 && downloadURL != "") {
                 val url = URL(downloadURL)
-
+                mSocket?.emit("working_status", "20")
                 val connection: URLConnection = url.openConnection()
                 connection.connect()
 
@@ -98,6 +103,7 @@ class EBookDownloadECOMoa {
                         }
                     }
                 }
+                mSocket?.emit("working_status", "80")
             }
 
             // 4. 인증(2차 라이선스) 받아오기 (받아온 라이선스는, meta-inf/license.xml 에 파일로 저장하거나, DB에 저장했다가, 파일을 풀 때 불러다 쓴다.)

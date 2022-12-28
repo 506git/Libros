@@ -121,8 +121,8 @@ object LibrosUtil {
             alertDialog.setPositiveButton(
                 btnMsg
             ) { dialog, which -> dialog.dismiss() }
-            alertDialog.create()
-            alertDialog.show()
+//            alertDialog.create()
+//            alertDialog.show()
         } catch (e: BadTokenException) {
             // TODO: handle exception
             Log.e("error", e.message.toString())

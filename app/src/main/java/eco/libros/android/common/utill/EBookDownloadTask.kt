@@ -3,6 +3,7 @@ package eco.libros.android.common.utill
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ProgressBar
@@ -39,14 +40,15 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         }
 
         mSocket.emit("working_start", "start")
+
         CoroutineScope(Main).launch {
             try {
                 progressBar = CustomProgressFragment.newInstance("다운로드 중입니다")
                 progressBar.show(myActivity.supportFragmentManager, "progress")
             } catch (e: WindowManager.BadTokenException) {
-                Log.e("error", e.message.toString())
+                Log.d("error", e.message.toString())
             }
-
+            Log.d("test","start")
 //            try {
             withContext(IO) {
                 try {
@@ -90,6 +92,8 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                                 returnObj[3] = ebookData
                                 returnObj[4] = 1
 
+                            } else {
+                                    mSocket.emit("working_error", "not found license")
                             }
                         }
 
@@ -254,7 +258,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
             }
 
             if (returnObj[1] == null){
-                LibrosUtil.showMsgWindow(mActivity, "알림", "오류입니다. 관리자에게 문의하세요", "확인")
+//                LibrosUtil.showMsgWindow(mActivity, "알림", "오류입니다. 관리자에게 문의하세요", "확인")
                 mSocket.emit("working_error", "Error")
                 mSocket.emit("status", "ready")
                 return@launch
@@ -279,8 +283,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                     }
                 }
             }
-
-
         }
         return null
     }

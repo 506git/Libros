@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'project-report'
+
 android {
     compileSdkVersion 30
     defaultConfig {
@@ -33,13 +34,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+//
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -63,6 +64,34 @@ android {
         viewBinding = true
     }
 
+//    flavorDimensions "version"
+//    productFlavors {
+//        version1 {
+//            dimension "version"
+//            applicationIdSuffix ".1"
+//            buildConfigField 'boolean', 'ISFREE', "true"
+//        }
+//        version2 {
+//            dimension "version"
+//            applicationIdSuffix ".2"
+//            buildConfigField 'boolean', 'ISFREE', "false"
+//        }
+////        version3 {
+//            dimension "version"
+//            applicationIdSuffix ".3"
+//            buildConfigField 'boolean', 'ISFREE', "false"
+//        }
+//        version4 {
+//            dimension "version"
+//            applicationIdSuffix ".4"
+//            buildConfigField 'boolean', 'ISFREE', "false"
+//        }
+//        version5 {
+//            dimension "version"
+//            applicationIdSuffix ".5"
+//            buildConfigField 'boolean', 'ISFREE', "false"
+//        }
+//    }
 }
 
 dependencies {

@@ -10,6 +10,7 @@ import android.view.WindowManager.BadTokenException
 import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.ProgressFragment
+import eco.libros.android.common.api.LibrosUpload
 import eco.libros.android.common.database.EbookDownloadDBFacade
 import eco.libros.android.common.database.ViewerDBFacade
 import eco.libros.android.common.model.EbookListVO
@@ -25,6 +26,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.xml.sax.SAXException
 import java.io.File
@@ -156,11 +158,28 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                        FileManager().zipFolder("$path/$fileName","$path/ziptest.zip")
 //                        FileManager().zipFile(file, "$path/$fileName/zipTest.zip")
 
-                        CompressZip().compress("$path/$fileName", path,fileName)
-                        showMsgDialog("알림", "다운로드 되었습니다.", "확인",eBookData.lentKey)
-                        val mSocket = (mActivity as MainActivity).mSocket
-                        mSocket.emit("working_finish","finish")
-                        mSocket.emit("status", "finish")
+                        val zipFile = CompressZip().compress("$path/$fileName", path,fileName)
+
+//                        LibrosRepository().checkAuthRepo(tempId, userAuthNum,encryptYn,resources.getString(R.string.device_type))?.let { response ->
+//                            if(response.isSuccessful){
+//                                Log.d("Testauth,",response.raw().toString())
+//                                return@withContext response.body()
+//                            } else
+//                                return@withContext null
+//                        }
+//                        showMsgDialog("알림", "다운로드 되었습니다.", "확인",eBookData.lentKey)
+                        runBlocking {
+                            val mSocket = (mActivity as MainActivity).mSocket
+                            LibrosUpload().upload(eBookData.uploadUrl, zipFile, eBookData, mSocket)
+                        }
+                        val deleteFile: File = File(path)
+
+                        if (deleteFile != null && deleteFile.exists()) {
+                            FileManager().deleteFolder(deleteFile)
+                        }
+
+
+
                     } else {
                         LibrosUtil.showMsgWindow(
                             activity = mActivity,

@@ -18,7 +18,7 @@ public class CompressZip {
      * @param path 압축할 폴더 경로
      * @param outputFileName 출력파일명
      */
-    public boolean compress(String path, String outputPath, String outputFileName) throws Throwable {
+    public File compress(String path, String outputPath, String outputFileName) throws Throwable {
         // 파일 압축 성공 여부
         boolean isChk = false;
 
@@ -53,7 +53,7 @@ public class CompressZip {
 //            compressZipFirst(zos);
             // 압축 성공.
             isChk = true;
-//            renameFileOne(outputPath, outputFileName, newName);
+            return renameFileOne(outputPath, outputFileName, newName);
         } catch (Throwable e) {
             throw e;
         } finally {
@@ -62,7 +62,6 @@ public class CompressZip {
             if (fos != null)
                 fos.close();
         }
-        return isChk;
     }
 
     /**
@@ -151,9 +150,9 @@ public class CompressZip {
         }
     }
 
-    public void renameFileOne(String path, String originFileName, String newFileName){
+    public File renameFileOne(String path, String originFileName, String newFileName){
         File originFile = new File(path+ "/" +originFileName);
-        File newFile = new File(path+"/test"+newFileName);
+        File newFile = new File(path+"/"+newFileName);
         Log.d("test rename ", "origin : " + path + originFileName +", new File : " + path + newFileName);
         if (originFile == null){
             System.out.println("originFile error");
@@ -162,8 +161,13 @@ public class CompressZip {
             System.out.println("newFile error");
         }
         if (originFile.renameTo(newFile)){
+
             System.out.println("test good");
-        }  else System.out.println("test failed");
+            return newFile;
+        }  else {
+            System.out.println("test failed");
+            return null;
+        }
 
     }
 

@@ -22,8 +22,11 @@ data class MyEbookListModel(
         @SerializedName("lent_key")
         val lentKey: String,
 
+        @SerializedName("cover")
+        val cover: String,
+
         @SerializedName("epubID")
-        val ePubId: String,
+        val ePubId: String?,
 
         @SerializedName("title")
         val title: String,
@@ -90,7 +93,11 @@ data class MyEbookListModel(
 
         @Expose
         @SerializedName("downloaded_FileName")
-        val downloadedFileName: String = null.toString()
+        val downloadedFileName: String = null.toString(),
+
+        @Expose
+        @SerializedName("uploadUrl")
+        val uploadUrl: String = null.toString()
 )
 
 data class LibResultModel(
