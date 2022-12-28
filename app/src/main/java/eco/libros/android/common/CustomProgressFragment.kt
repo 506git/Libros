@@ -14,6 +14,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import eco.libros.android.R
+import eco.libros.android.ui.MainActivity
+import io.socket.client.Socket
 import kotlinx.android.synthetic.main.fragment_progress.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +35,7 @@ class CustomProgressFragment : DialogFragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private var mSocket: Socket? = null
     private var msg: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +48,12 @@ class CustomProgressFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = requireActivity().layoutInflater.inflate(R.layout.fragment_custom_progress, null)
+        mSocket = (activity as MainActivity).mSocket
+
         arguments?.let {
             view.msg.text = it.getString(ARG_PARAM1)
             msg = it.getString(ARG_PARAM1)
+
         }
 
         val builder = AlertDialog.Builder(requireContext()).setView(view)
@@ -82,6 +87,7 @@ class CustomProgressFragment : DialogFragment() {
 
     fun progressTask(num: Int) {
         CoroutineScope(Dispatchers.Main).launch {
+            mSocket?.emit("working_status", "${num*10}")
             dialog?.findViewById<ProgressBar>(R.id.progressBar)?.smoothProgress(num*10)
             dialog?.findViewById<TextView>(R.id.msg)?.text = "${msg}.. $num%"
         }

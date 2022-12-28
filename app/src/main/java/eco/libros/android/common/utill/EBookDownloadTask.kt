@@ -16,6 +16,7 @@ import eco.libros.android.common.model.EbookListVO
 import eco.libros.android.common.variable.GlobalVariable
 import eco.libros.android.ebook.download.*
 import eco.libros.android.myContents.MyEbookListModel
+import io.socket.client.Socket
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -24,7 +25,7 @@ import kotlinx.coroutines.withContext
 import kr.eco.common.ebook.viewer.file.drm.eco.EBookImageDrmEcoMoaAsyncTask
 import java.util.*
 
-class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _downloadPlace: String) {
+class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _downloadPlace: String, socket : Socket) {
 
     suspend fun downloadEBook(): Unit? {
         val downloadUrl = ebookData.downloadLink
@@ -36,8 +37,8 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         if (ebookLibName.isEmpty()) {
             return null
         }
-        Log.d("testDownloadStart", ebookData.comCode)
 
+        mSocket.emit("working_start", "start")
         CoroutineScope(Main).launch {
             try {
                 progressBar = CustomProgressFragment.newInstance("다운로드 중입니다")
@@ -254,6 +255,8 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
             if (returnObj[1] == null){
                 LibrosUtil.showMsgWindow(mActivity, "알림", "오류입니다. 관리자에게 문의하세요", "확인")
+                mSocket.emit("working_error", "Error")
+                mSocket.emit("status", "ready")
                 return@launch
             }
 
@@ -288,6 +291,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         ebookLibName = ebookData.eBookLibName
         downloadPlace = _downloadPlace
         myActivity = mActivity as FragmentActivity
+        mSocket = socket
     }
 
     companion object {
@@ -297,6 +301,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
         lateinit var ebookData: MyEbookListModel
         lateinit var downloadPlace: String
         lateinit var myActivity: FragmentActivity
+        lateinit var mSocket: Socket
         var progressBar = CustomProgressFragment()
     }
 }

@@ -13,11 +13,13 @@ import eco.libros.android.common.ProgressFragment
 import eco.libros.android.common.database.EbookDownloadDBFacade
 import eco.libros.android.common.database.ViewerDBFacade
 import eco.libros.android.common.model.EbookListVO
+import eco.libros.android.common.utill.EBookDownloadTask
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
 import eco.libros.android.ebook.download.FileManager
 import eco.libros.android.myContents.MyEbookListModel
+import eco.libros.android.ui.MainActivity
 import eco.libros.android.utils.CompressZip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -153,8 +155,12 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                        file[0] = "$path/$fileName"
 //                        FileManager().zipFolder("$path/$fileName","$path/ziptest.zip")
 //                        FileManager().zipFile(file, "$path/$fileName/zipTest.zip")
+
                         CompressZip().compress("$path/$fileName", path,fileName)
                         showMsgDialog("알림", "다운로드 되었습니다.", "확인",eBookData.lentKey)
+                        val mSocket = (mActivity as MainActivity).mSocket
+                        mSocket.emit("working_finish","finish")
+                        mSocket.emit("status", "finish")
                     } else {
                         LibrosUtil.showMsgWindow(
                             activity = mActivity,
