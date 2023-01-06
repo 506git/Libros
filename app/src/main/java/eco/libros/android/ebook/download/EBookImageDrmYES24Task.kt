@@ -126,9 +126,12 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                         val path = "${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}/${fileName}"
                         Log.d("test",path)
                         Log.d("test file Name ", fileName)
+                        Log.d("test subFile Name ", subFileName)
                         Log.d("test file ePubId ", eBookInfo.ePubId.toString())
                         Log.d("test file libName ", eBookInfo.eBookLibName)
                         decryptYES24(fileName, eBookInfo.ePubId.toString(), eBookInfo.eBookLibName.toString(), null)
+
+//                        CompressZip().renameFileOne(path, subFileName, "test")
 
                         val zipFile = CompressZip().compress("$path/$subFileName", path, subFileName)
 

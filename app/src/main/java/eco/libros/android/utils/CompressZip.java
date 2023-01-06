@@ -18,15 +18,20 @@ public class CompressZip {
      * @param path 압축할 폴더 경로
      * @param outputFileName 출력파일명
      */
+
+    // path = /data/user/0/eco.libros.android/files/libros/8fa81d95-250f-40d2-8e31-c3ad58116d94.epub/8fa81d95-250f-40d2-8e31-c3ad58116d94
+    // outputPath = /data/user/0/eco.libros.android/files/libros/8fa81d95-250f-40d2-8e31-c3ad58116d94.epub
+    // outputFileName = 8fa81d95-250f-40d2-8e31-c3ad58116d94
     public File compress(String path, String outputPath, String outputFileName) throws Throwable {
         // 파일 압축 성공 여부
         boolean isChk = false;
+        String newName = outputFileName + ".epub";
 
         File file = new File(path);
 
         // 파일의 .zip이 없는 경우, .zip 을 붙여준다.
         int pos = outputFileName.lastIndexOf(".") == -1 ? outputFileName.length() : outputFileName.lastIndexOf(".");
-        String newName = outputFileName + ".epub";
+
         // outputFileName .zip이 없는 경우
         if (!outputFileName.substring(pos).equalsIgnoreCase(".zip")) {
             outputFileName += ".zip";
@@ -46,14 +51,13 @@ public class CompressZip {
             fos = new FileOutputStream(new File(outputPath +"/"+ outputFileName));
             zos = new ZipOutputStream(fos);
 
-
             // 디렉토리 검색를 통한 하위 파일과 폴더 검색
-
             searchDirectory(file, file.getPath(), outputFileName, zos);
 //            compressZipFirst(zos);
             // 압축 성공.
             isChk = true;
-            return renameFileOne(outputPath, outputFileName, newName);
+            return null;
+//            return renameFileOne(outputPath, outputFileName, newName);
         } catch (Throwable e) {
             throw e;
         } finally {
@@ -96,17 +100,6 @@ public class CompressZip {
             }
         }
     }
-    private void compressZipFirst(/*File file, String root, String outputFileName, */ZipOutputStream zos) throws Throwable {
-        byte[] content = "application/epub+zip".getBytes("UTF-8");
-        ZipEntry entry = new ZipEntry("mimetype");
-        entry.setMethod(ZipEntry.STORED);
-        entry.setSize(20);
-        entry.setCompressedSize(20);
-        entry.setCrc(0x2CAB616F); // pre-computed
-        zos.putNextEntry(entry);
-        zos.write(content);
-        zos.closeEntry();
-    }
 
     /**
      * @description압축 메소드
@@ -121,8 +114,6 @@ public class CompressZip {
             String zipName = file.getPath().replace(root + "\\", "");
             outputFileName = outputFileName.substring(0, outputFileName.indexOf(".zip"));
             zipName = zipName.substring(zipName.indexOf(outputFileName) + outputFileName.length() + outputFileName.length()+1 );
-
-//            Log.d("testSubString","teststatc : " +zipName);
 //            zipName = file.getPath();
             // 파일을 읽어드림
             fis = new FileInputStream(file);
@@ -131,6 +122,7 @@ public class CompressZip {
 //                return;
 //            }
             ZipEntry zipentry = new ZipEntry(zipName);
+
             // 스트림에 밀어넣기(자동 오픈)
             zos.putNextEntry(zipentry);
             int length = (int) file.length();
