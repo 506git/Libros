@@ -10,8 +10,10 @@ import com.markany.xsync.core.XSyncContent
 import com.markany.xsync.core.XSyncZipFile
 import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
+import eco.libros.android.common.utill.EBookDownloadTask
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
+import eco.libros.android.ui.MainActivity
 import java.io.*
 import java.util.*
 import java.util.zip.ZipEntry
@@ -556,7 +558,9 @@ class FileManager {
                         LibrosLog.print(e.toString())
                         continue
                     } catch (e: XSyncException) {
-                        LibrosLog.print(e.toString())
+                        val mSocket = (activity as MainActivity).mSocket
+                        mSocket.emit("working_error", e.toString())
+                        LibrosLog.print("tt ${e.toString()}")
                         continue
                     }
 
@@ -593,9 +597,12 @@ class FileManager {
 
 
         } catch (e: java.lang.Exception){
+            val mSocket = (activity as MainActivity).mSocket
+            mSocket.emit("working_error", e.toString())
             LibrosLog.print(e.toString())
             retval = -1
         } catch (e: IOException){
+            Log.d("TEST11","tt22")
             LibrosLog.print(e.toString())
             retval = -1
         } finally {

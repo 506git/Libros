@@ -25,13 +25,12 @@ public class CompressZip {
     public File compress(String path, String outputPath, String outputFileName) throws Throwable {
         // 파일 압축 성공 여부
         boolean isChk = false;
-        String newName = outputFileName + ".epub";
 
         File file = new File(path);
 
         // 파일의 .zip이 없는 경우, .zip 을 붙여준다.
         int pos = outputFileName.lastIndexOf(".") == -1 ? outputFileName.length() : outputFileName.lastIndexOf(".");
-
+        String newName = outputFileName + ".epub";
         // outputFileName .zip이 없는 경우
         if (!outputFileName.substring(pos).equalsIgnoreCase(".zip")) {
             outputFileName += ".zip";
@@ -56,8 +55,7 @@ public class CompressZip {
 //            compressZipFirst(zos);
             // 압축 성공.
             isChk = true;
-            return null;
-//            return renameFileOne(outputPath, outputFileName, newName);
+            return renameFileOne(outputPath, outputFileName, newName);
         } catch (Throwable e) {
             throw e;
         } finally {
@@ -145,7 +143,7 @@ public class CompressZip {
     public File renameFileOne(String path, String originFileName, String newFileName){
         File originFile = new File(path+ "/" + originFileName);
         File newFile = new File(path+"/" + newFileName);
-        Log.d("test rename ", "origin : " + path + originFileName +", new File : " + path + newFileName);
+        Log.d("test rename ", "origin : " + path + "/"+ originFileName +", new File : " + path + "/" + newFileName);
         if (originFile == null){
             System.out.println("originFile error");
         }

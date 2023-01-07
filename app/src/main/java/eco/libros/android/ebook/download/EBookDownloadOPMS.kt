@@ -3,9 +3,11 @@ package eco.libros.android.ebook.download
 import android.app.Activity
 import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
+import eco.libros.android.common.utill.EBookDownloadTask
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
+import eco.libros.android.ui.MainActivity
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -92,6 +94,8 @@ class EBookDownloadOPMS {
             } catch (e: Exception) {
                 isComplete = false
                 LibrosLog.print(e.toString())
+                val mSocket = (activity as MainActivity).mSocket
+                mSocket.emit("working_error", e.toString())
             } finally {
                 try {
                     inputStream?.close()

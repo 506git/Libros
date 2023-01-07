@@ -47,7 +47,7 @@ object LibrosUtil {
                 context.contentResolver, Secure.ANDROID_ID
             )
             Log.d("testsddddf", deviceId)
-            deviceId // UUID 대체코드 }
+            deviceId
         } else {
             tmDevice = "" + tm.deviceId
             tmSerial = "" + tm.simSerialNumber

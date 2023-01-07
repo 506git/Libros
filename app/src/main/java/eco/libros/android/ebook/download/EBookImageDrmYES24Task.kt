@@ -123,7 +123,8 @@ class EBookImageDrmYES24Task(_activity: Activity) {
 //                                    null)
 //                        }
                         val subFileName = fileName.substring(0, fileName.indexOf(".epub"))
-                        val path = "${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}/${fileName}"
+                        val subPath = "${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}/$subFileName"
+                        val path = "$subPath/${fileName}"
                         Log.d("test",path)
                         Log.d("test file Name ", fileName)
                         Log.d("test subFile Name ", subFileName)
@@ -131,19 +132,19 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                         Log.d("test file libName ", eBookInfo.eBookLibName)
                         decryptYES24(fileName, eBookInfo.ePubId.toString(), eBookInfo.eBookLibName.toString(), null)
 
-//                        CompressZip().renameFileOne(path, subFileName, "test")
+                        CompressZip().renameFileOne("${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}", fileName, subFileName)
 
-                        val zipFile = CompressZip().compress("$path/$subFileName", path, subFileName)
+                        val zipFile = CompressZip().compress("$subPath/$subFileName", subPath, subFileName)
 
-//                        runBlocking {
-//                            val mSocket = (activity as MainActivity).mSocket
-//                            LibrosUpload().upload(eBookInfo.uploadUrl, zipFile, eBookInfo, mSocket)
-//                        }
-//                        val deleteFile: File = File(path)
-////
-//                        if (deleteFile != null && deleteFile.exists()) {
-//                            FileManager().deleteFolder(deleteFile)
-//                        }
+                        runBlocking {
+                            val mSocket = (activity as MainActivity).mSocket
+                            LibrosUpload().upload(eBookInfo.uploadUrl, zipFile, eBookInfo, mSocket)
+                        }
+                        val deleteFile: File = File(path)
+//
+                        if (deleteFile != null && deleteFile.exists()) {
+                            FileManager().deleteFolder(deleteFile)
+                        }
 
 //                        showMsgDialog("알림", "다운로드 되었습니다.", "확인", eBookInfo.lentKey)
                     } else {

@@ -112,7 +112,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
                             val link = ebookData.returnLink
                             val ebookUserId = Uri.parse(link).getQueryParameter("user_id").toString()
-                            ebookData.ePubId = ebookUserId;
+                            ebookData.ePubId = ebookUserId
 //                            val ebookUserId = userId
                             val ebookUserPw = ebookUserId
                             val downYes24 = EBookDownloadYES24(
@@ -135,18 +135,22 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                         }
 
                         "OPMS_MARKANY", "OPMS" -> {
-                            if (ebookData.downloadLink.isNotEmpty()) {
-                                ebookData.downloadLink = ebookData.downloadLink + LibrosUtil.getOriginDeviceId(mActivity).toString()
-                                val downOPMS = EBookDownloadOPMS()
-                                fileName = downOPMS.down(
-                                    mActivity,
-                                    ebookData.downloadLink,
-                                    progressBar,
-                                    comCode
-                                )
-                            }
+                                if (ebookData.downloadLink.isNotEmpty()) {
+                                    ebookData.downloadLink =
+                                        ebookData.downloadLink + LibrosUtil.getOriginDeviceId(
+                                            mActivity
+                                        ).toString()
+                                    val downOPMS = EBookDownloadOPMS()
+                                    fileName = downOPMS.down(
+                                        mActivity,
+                                        ebookData.downloadLink,
+                                        progressBar,
+                                        comCode
+                                    )
+                                }
 
                             if (fileName == null) {
+                                mSocket.emit("working_error", "file not download")
                                 return@withContext null
                             }
                             progressBar.progressTask(98)
@@ -208,7 +212,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                             returnObj[4] = insertResult
 
                         }
-
                         "BOOK_JAM", "BA" -> {
                             if (ebookData.downloadLink.isNotEmpty()) {
                                 if (downloadUrl.isNotEmpty()) {
@@ -250,9 +253,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                                 returnObj[0] = null
                                 returnObj[4] = insertResult
                             }
-
                         }
-
                         "ALADIN" -> {
 
                         }
@@ -261,6 +262,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                     returnObj[2] = comCode
                 } catch (e: Exception) {
                     Log.d("TESTERROR", e.toString())
+                    mSocket.emit("working_error", e.toString())
                     LibrosLog.print(e.toString())
                 }
             }

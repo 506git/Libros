@@ -263,7 +263,8 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
 
         task.progressTask(25)
 
-        val fileName = UUID.randomUUID().toString() + ".epub"
+//        val fileName = UUID.randomUUID().toString() + ".epub"
+        val fileName = Date().time.toString() + ".epub"
         val downloadUri = resParams[1] as String
 
         // TODO: downloadUri로 부터 전자책 다운로드를 수행함  <커스터마이징>
@@ -626,6 +627,7 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
 
         val b64_idsKmCert = respMsg.getParamValue("ids.km.cert")
         val nonce = respMsg.getParamValue("ids.secure.nonce")
+
 
         return arrayOf(resultCode, resultMsg, arrayOf<String>(b64_idsKmCert, nonce))
     }
