@@ -484,7 +484,6 @@ public class EpubViewerActivity extends AppCompatActivity {
 
     @Override
     public void onActionModeStarted(ActionMode mode) {
-        Log.d("ActionBar", "onActionModeStarted");
         super.onActionModeStarted(mode);
         mActionBarContainer.setAlpha(1);
     }
@@ -492,7 +491,6 @@ public class EpubViewerActivity extends AppCompatActivity {
     ActionMode.Callback mStartActionModeCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            Log.d("ActionBar", "onCreateActionMode");
             isActionModeStarted = true;
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mHighlightView.getLayoutParams();
 
@@ -515,7 +513,6 @@ public class EpubViewerActivity extends AppCompatActivity {
 
         @Override
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            Log.d("ActionBar", "onPrepareActionMode");
             return false;
         }
 
@@ -526,7 +523,6 @@ public class EpubViewerActivity extends AppCompatActivity {
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            Log.d("ActionBar", "onDestroyActionMode");
             isActionModeStarted = false;
         }
     };
@@ -1440,7 +1436,7 @@ public class EpubViewerActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public void logJavascript(String message) {
-            Log.d("javascript", message);
+
         }
 
         @JavascriptInterface

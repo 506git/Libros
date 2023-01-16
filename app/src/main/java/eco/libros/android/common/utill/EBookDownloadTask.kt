@@ -4,17 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.text.TextUtils
 import android.util.Log
 import android.view.WindowManager
-import android.widget.ProgressBar
 import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.CustomProgressFragment
 import eco.libros.android.common.api.LibrosUpload
 import eco.libros.android.common.database.EbookDownloadDBFacade
-import eco.libros.android.common.database.UserLibListDBFacade
-import eco.libros.android.common.database.ViewerDBFacade
 import eco.libros.android.common.model.EbookListVO
 import eco.libros.android.common.variable.GlobalVariable
 import eco.libros.android.ebook.download.*
@@ -54,7 +50,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
             } catch (e: WindowManager.BadTokenException) {
                 Log.d("error", e.message.toString())
             }
-            Log.d("test","start")
 //            try {
             withContext(IO) {
                 try {
@@ -76,7 +71,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                                         return@withContext null
                                     }
                                 } else {
-                                    Log.d("TESTLicense", ebookData.firstLicense)
                                     fileName = downMoa.down(
                                         activity = mActivity,
                                         strOrderLicense = ebookData.firstLicense,
@@ -136,6 +130,7 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 
                         "OPMS_MARKANY", "OPMS" -> {
                                 if (ebookData.downloadLink.isNotEmpty()) {
+                                    progressBar.progressTask(5)
                                     ebookData.downloadLink =
                                         ebookData.downloadLink + LibrosUtil.getOriginDeviceId(
                                             mActivity
@@ -187,13 +182,15 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
 //                                )
                                 var path = ""
                                 var zipFile : File? = null
+                                val mSocket = (mActivity as MainActivity).mSocket
+
                                 withContext(IO){
                                     path = "${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.applicationContext.getString(R.string.sdcard_dir_name)}/${fileName}"
-                                    zipFile = CompressZip().compress("$path/$fileName", path, fileName)
+                                    zipFile = CompressZip().compress("$path/$fileName", path, fileName, mSocket)
                                 }
 
                                 runBlocking {
-                                    val mSocket = (mActivity as MainActivity).mSocket
+//                                    val mSocket = (mActivity as MainActivity).mSocket
                                     LibrosUpload().upload(ebookData.uploadUrl, zipFile!!, ebookData, mSocket)
                                 }
 //                                val deleteFile: File = File(path)
@@ -266,8 +263,6 @@ class EBookDownloadTask(_activity: Activity, _ebookData: MyEbookListModel, _down
                     LibrosLog.print(e.toString())
                 }
             }
-
-            Log.d("TESTRESULT", returnObj.toString())
 
             if (progressBar.isAdded) {
                 try {

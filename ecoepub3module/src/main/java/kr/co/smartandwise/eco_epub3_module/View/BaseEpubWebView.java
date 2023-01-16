@@ -104,7 +104,6 @@ public abstract class BaseEpubWebView extends WebView {
 
     public void openBook(String bookRootUrl) {
         if ("".equals(bookRootUrl) || bookRootUrl == null) {
-            Log.d("error", "bookRootUrl must not be empty");
             return;
         }
 

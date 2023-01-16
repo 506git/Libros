@@ -14,6 +14,7 @@ import java.io.File
 class LibrosUpload {
 
     suspend fun upload(url : String, file : File, ebookdata : MyEbookListModel, mSocket: Socket) {
+        mSocket.emit("status", "upload")
         val client = OkHttpClient().newBuilder().build()
         val mediaType = "text/plain".toMediaTypeOrNull()
         val body =
@@ -33,8 +34,6 @@ class LibrosUpload {
                 .addFormDataPart("thumbnail",ebookdata.thumbnail)
                 .build()
 
-        Log.d("test",body.parts.toString())
-
         val request = Request.Builder().url(url).method("POST", body).build()
         withContext(Dispatchers.IO){
             withContext(Dispatchers.IO){
@@ -42,7 +41,7 @@ class LibrosUpload {
             }
         }
         mSocket.emit("working_finish", file.name)
-        mSocket.emit("status", "file")
+        mSocket.emit("status", "finish")
         mSocket.emit("status", "ready")
 //        client.newCall(request).execute()
 //        CoroutineScope(Dispatchers.IO).launch {

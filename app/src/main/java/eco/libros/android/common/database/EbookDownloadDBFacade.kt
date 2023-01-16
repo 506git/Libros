@@ -84,7 +84,7 @@ class EbookDownloadDBFacade(context: Context) {
                             val expireDate = date.time
                             val nowTime: Long = System.currentTimeMillis()
                             if (expireDate <= nowTime){
-                                Log.d("testdate2","nowTime.toString()")
+
                                 val bookId = cursor.getString(cursor.getColumnIndex(ContactEbookContract.Entry.lentKey))
                                 val libCode = cursor.getString(cursor.getColumnIndex(ContactEbookContract.Entry.libCode))
                                 deleteBook(libCode, bookId)

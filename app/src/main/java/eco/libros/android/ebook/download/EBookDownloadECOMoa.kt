@@ -35,8 +35,7 @@ class EBookDownloadECOMoa {
 
         val mSocket = (activity as MainActivity).mSocket
 
-
-        mSocket?.emit("working_status", "0")
+        mSocket.emit("working_status", "0")
         makeDir = if (!dir.exists())
             dir.mkdir()
         else

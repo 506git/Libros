@@ -74,7 +74,7 @@ class EpubViewer : EpubViewerActivity() {
     }
 
     override fun onErrorActivityFinish(debugMessage: String?) {
-        Log.d("TESTException", debugMessage.toString() )
+
     }
 
     override fun onDataUpdate(contentId: String, epubBase64: String) {

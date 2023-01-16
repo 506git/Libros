@@ -39,7 +39,7 @@ class EBookDownloadOPMS {
         if (file.exists()) {
             file.delete()
         }
-
+        task.progressTask(20)
         if (url != null && url.isNotEmpty()) {
             var inputStream: InputStream? = null
             var isComplete = true
@@ -71,7 +71,7 @@ class EBookDownloadOPMS {
 
                 val buf = ByteArray(size)
                 val fileResult = file.createNewFile()
-
+                task.progressTask(30)
                 if (fileResult) {
                     FileOutputStream(file).use { fos ->
                         var cnt: Int? = 0
@@ -80,17 +80,18 @@ class EBookDownloadOPMS {
                         while (inputStream.read(buf, 0, buf.size).also { cnt = it } != -1) {
                             total += cnt?.toLong()!!
                             val i = (total * 80 / lengthOfFile).toInt()
-                            if (i > 79) {
-                                task.progressTask(79)
-                            } else {
-                                task.progressTask(i)
-                            }
+//                            if (i > 79) {
+//                                task.progressTask(79)
+//                            } else {
+//                                task.progressTask(i)
+//                            }
                             fos.write(buf, 0, cnt!!)
                             fos.flush()
                             readData += cnt!!.toLong()
                         }
                     }
                 }
+                task.progressTask(80)
             } catch (e: Exception) {
                 isComplete = false
                 LibrosLog.print(e.toString())

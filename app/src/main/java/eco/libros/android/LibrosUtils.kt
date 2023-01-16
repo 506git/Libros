@@ -19,7 +19,7 @@ object LibrosUtils {
             deviceId = Settings.Secure.getString(
                 context.contentResolver, Settings.Secure.ANDROID_ID
             )
-            Log.d("testsddddf", deviceId)
+
             deviceId // UUID 대체코드 }
         } else {
             tmDevice = "" + tm.deviceId
@@ -30,7 +30,7 @@ object LibrosUtils {
                 tmDevice.hashCode().toLong() shl 32 or tmSerial.hashCode().toLong()
             )
             deviceId = deviceUuid.toString()
-            Log.d("testsddd22df", deviceId)
+
             deviceId.replace("-".toRegex(), "")
         }
 //        return deviceId.replaceAll("-", "");

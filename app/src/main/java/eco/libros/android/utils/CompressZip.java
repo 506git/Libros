@@ -5,24 +5,23 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import eco.libros.android.common.utill.LibrosUtil;
+import io.socket.client.Socket;
 
 public class CompressZip {
     /**
      * @description 압축 메소드
      * @param path 압축할 폴더 경로
      * @param outputFileName 출력파일명
+     * @param mSocket
      */
 
     // path = /data/user/0/eco.libros.android/files/libros/8fa81d95-250f-40d2-8e31-c3ad58116d94.epub/8fa81d95-250f-40d2-8e31-c3ad58116d94
     // outputPath = /data/user/0/eco.libros.android/files/libros/8fa81d95-250f-40d2-8e31-c3ad58116d94.epub
     // outputFileName = 8fa81d95-250f-40d2-8e31-c3ad58116d94
-    public File compress(String path, String outputPath, String outputFileName) throws Throwable {
+    public File compress(String path, String outputPath, String outputFileName, Socket mSocket) throws Exception {
         // 파일 압축 성공 여부
         boolean isChk = false;
 
@@ -46,6 +45,7 @@ public class CompressZip {
         // 압축 스트림
         ZipOutputStream zos = null;
 
+        mSocket.emit("status", "upload");
         try {
             fos = new FileOutputStream(new File(outputPath +"/"+ outputFileName));
             zos = new ZipOutputStream(fos);
@@ -143,7 +143,7 @@ public class CompressZip {
     public File renameFileOne(String path, String originFileName, String newFileName){
         File originFile = new File(path+ "/" + originFileName);
         File newFile = new File(path+"/" + newFileName);
-        Log.d("test rename ", "origin : " + path + "/"+ originFileName +", new File : " + path + "/" + newFileName);
+
         if (originFile == null){
             System.out.println("originFile error");
         }

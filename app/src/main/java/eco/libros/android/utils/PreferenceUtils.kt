@@ -88,10 +88,8 @@ class PreferenceUtils (mContext: Context) {
                     URLDecoder.decode(userId, "utf-8")
                 } catch (e: UnsupportedEncodingException) {
                     // TODO Auto-generated catch block
-                    Log.d("teste", e.toString())
                     return userId
                 } catch (e: Exception) {
-                    Log.d("teste2", e.toString())
                     // TODO Auto-generated catch block
                     return userId
                 }

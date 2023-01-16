@@ -46,7 +46,7 @@ object LibrosUtil {
             deviceId = Secure.getString(
                 context.contentResolver, Secure.ANDROID_ID
             )
-            Log.d("testsddddf", deviceId)
+
             deviceId
         } else {
             tmDevice = "" + tm.deviceId
@@ -57,7 +57,7 @@ object LibrosUtil {
                 tmDevice.hashCode().toLong() shl 32 or tmSerial.hashCode().toLong()
             )
             deviceId = deviceUuid.toString()
-            Log.d("testsddd22df", deviceId)
+
             deviceId.replace("-".toRegex(), "")
         }
 //        return deviceId.replaceAll("-", "");
@@ -400,7 +400,7 @@ object LibrosUtil {
         for (i in map) {
             obj.put(i.key, i.value)
         }
-        Log.d("testobj", obj.toString())
+
         return obj
     }
 
@@ -427,7 +427,7 @@ object LibrosUtil {
         }
         val libListObj = JSONObject()
         libListObj.put("UserLibraryInfoList", jsonArray)
-        Log.d("TESTLIBLIST", libListObj.toString())
+
         return libListObj
     }
     fun getLibId(context: Context, libCode: String?): String {
@@ -508,7 +508,7 @@ object LibrosUtil {
         var msg = ""
 
         val lib = UserLibListDBFacade(activity).getLibYnInfo(libCode.toString())
-        Log.d("TESTLIB", lib.toString())
+
         if (libCode == null){
             msg = "도서관 데이터를 찾을 수 없습니다."
             obj[0] = canUse
@@ -525,7 +525,7 @@ object LibrosUtil {
         }
         obj[0] = canUse
         obj[1] = msg
-        Log.d("TESTOBJ", obj.toString())
+
         return obj
     }
 

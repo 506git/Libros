@@ -12,6 +12,7 @@ import btworks.util.Base64
 import eco.libros.android.common.CustomProgressFragment
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
+import eco.libros.android.ui.MainActivity
 import kr.co.smartandwise.eco_epub3_module.Drm.yes24.AndroidZipUtil4IDS
 import kr.co.smartandwise.eco_epub3_module.Drm.yes24.IDSClientApiImpl
 
@@ -104,7 +105,10 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
         // TODO: check this !!
         task = _task
         task.progressTask(1)
-        Log.d("test","stepp2")
+
+        val mSocket = (activity as MainActivity).mSocket
+
+        mSocket.emit("working_status", "0")
         val deviceType: Int = DRMConstants.SYSTYPE_PORTABLE_ANDROID
         val deviceInfo: String
 
@@ -373,6 +377,7 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
 
         val reqHeader = "GET $requestURI HTTP/1.1${CRLF}Host: $hostName" + (if (port != 80) ":$port" else "") + CRLF +
                 "Connection: Close$CRLF$CRLF"
+        task.progressTask(30)
         try {
             val socket = Socket(hostName, port)
             BufferedOutputStream(socket.getOutputStream()).use { os ->
@@ -408,7 +413,7 @@ class EBookDownloadYES24(_activity: Activity, _sdCardDirName: String, _userId: S
                                     actual = bis.read(baf, 0, BUFFER_SIZE)
                                     i += actual.toDouble()
                                     if (actual != -1) {
-                                        task.progressTask((i * 55 / contentLength).toInt() + 25)
+//                                        task.progressTask((i * 55 / contentLength).toInt() + 25)
                                     }
                                 }
                             }

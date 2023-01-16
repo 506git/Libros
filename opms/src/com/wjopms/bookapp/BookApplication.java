@@ -58,7 +58,6 @@ public class BookApplication extends BookAppDelegate implements PapyrusBookViewC
             PapyrusBookViewController.setInitialParams(book, null, 0, false, this);
             Class controllerClass = getControllerClassForBook(book);
             Intent bookController = new Intent(this, controllerClass);
-            Log.d("TESTBOOJAM","book");
             //bookController.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             bookController.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

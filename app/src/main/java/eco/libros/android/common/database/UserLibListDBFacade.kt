@@ -246,7 +246,7 @@ class UserLibListDBFacade(context: Context) {
         db.beginTransaction()
         val selectQuery =
             ("SELECT * FROM " + ContactContract.Entry.TABLE_NAME + " WHERE " + ContactContract.Entry.libraryCode + " = '" + libCode + "' ")
-        Log.d("TESTLIB",libCode)
+
         var cursor: Cursor? = null
         var libInfo : UserLibListDataVO? = null
         try {

@@ -45,7 +45,7 @@ class MyLibManager {
             val eBook = withContext(IO) {
                 EbookDownloadDBFacade(activity).getDownloadFileName(lentKey)
             }
-            Log.d("TESTREADSTART23", eBook.toString())
+
             if (newEbook != null) {
                 newEbook.bookName = eBook.title
                 if (newEbook.bookData == null || newEbook.bookData!!.trim().isEmpty()) {
@@ -64,11 +64,11 @@ class MyLibManager {
                     }
                 }
             }
-            Log.d("TESTREADSTART23", "eBook.fileName")
+
             if (eBook == null) {
                 return@async
             }
-            Log.d("TESTREADSTART23", "시간 검사")
+
             // 시간 검사
             val strStartTime: String? = eBook.useStartTime
             val strEndTime: String? = eBook.useEndTime
@@ -95,7 +95,7 @@ class MyLibManager {
             if (epubId.isEmpty()) {
                 epubId = "163905"
             }
-            Log.d("TESTREADSTART23", eBook.fileName)
+
             if (!eBook.drm.equals("BOOK_JAM", true) && (epubId == null || epubId.trim()
                             .isEmpty())
             ) {
@@ -106,7 +106,7 @@ class MyLibManager {
                 if (!eBook.drm.equals("BOOK_JAM", true) && eBook.fileType.equals("PDF", true)) {
 
                 } else {
-                    Log.d("TESTREADSTART", "START")
+
                     when(eBook.drm.toUpperCase(Locale.getDefault())){
                         "ECO_MOA", "YES24" ->{
                             val userInfo = withContext(IO) {
@@ -115,7 +115,7 @@ class MyLibManager {
 
                             val eBookUserId = userInfo?.eBookId
                             val eBookUserPw = userInfo?.eBookPw
-                            Log.d("TESTREADSTART2", "START")
+
                             withContext(IO) {
                                 PreloadAsyncTask(
                                         activity, eBook.fileName, eBook.drm,
@@ -127,7 +127,7 @@ class MyLibManager {
                             }
                         }
                         "BOOK_JAM", "BA" ->{
-                            Log.d("TESTREADSTARTba", "START")
+
                             withContext(Main) {
                                 val application = BookApplication()
                                 application.initialize(activity)

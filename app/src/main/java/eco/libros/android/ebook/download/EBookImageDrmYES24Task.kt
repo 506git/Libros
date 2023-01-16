@@ -10,13 +10,9 @@ import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.ProgressFragment
 import eco.libros.android.common.api.LibrosUpload
-import eco.libros.android.common.database.EbookDownloadDBFacade
-import eco.libros.android.common.database.ViewerDBFacade
-import eco.libros.android.common.model.EbookListVO
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
-import eco.libros.android.ebook.PreloadAsyncTask
 import eco.libros.android.myContents.MyEbookListModel
 import eco.libros.android.ui.MainActivity
 import eco.libros.android.utils.CompressZip
@@ -81,7 +77,7 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                     val eBookInfo = _eBookInfo as MyEbookListModel
                     updateEBookDownStatic(eBookInfo.libCode)
                 }
-                Log.d("TEst RESULT", result.toString())
+
                 obj[0] = result
                 obj[1] = _eBookInfo
                 obj[2] = fileName
@@ -125,16 +121,18 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                         val subFileName = fileName.substring(0, fileName.indexOf(".epub"))
                         val subPath = "${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}/$subFileName"
                         val path = "$subPath/${fileName}"
-                        Log.d("test",path)
-                        Log.d("test file Name ", fileName)
-                        Log.d("test subFile Name ", subFileName)
-                        Log.d("test file ePubId ", eBookInfo.ePubId.toString())
-                        Log.d("test file libName ", eBookInfo.eBookLibName)
+
                         decryptYES24(fileName, eBookInfo.ePubId.toString(), eBookInfo.eBookLibName.toString(), null)
 
                         CompressZip().renameFileOne("${LibrosUtil.getEPUBRootPath(activity)}/${activity.applicationContext.resources.getString(R.string.sdcard_dir_name)}", fileName, subFileName)
+                        val mSocket = (activity as MainActivity).mSocket
 
-                        val zipFile = CompressZip().compress("$subPath/$subFileName", subPath, subFileName)
+                        val zipFile = CompressZip().compress(
+                            "$subPath/$subFileName",
+                            subPath,
+                            subFileName,
+                            mSocket
+                        )
 
                         runBlocking {
                             val mSocket = (activity as MainActivity).mSocket
@@ -193,7 +191,6 @@ class EBookImageDrmYES24Task(_activity: Activity) {
                             btnMsg
                     ) { dialog, _ ->
                         dialog.dismiss()
-                        Log.d("TESTLENTKEY", lentKey)
                         val intent = Intent(GlobalVariable.DOWNLOAD_RESULT)
                         intent.putExtra("lent_key", lentKey)
                         activity.sendBroadcast(intent)

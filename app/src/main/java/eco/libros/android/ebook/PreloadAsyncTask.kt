@@ -73,7 +73,6 @@ class PreloadAsyncTask(_activity: Activity, _epubFileName: String, _drmType: Str
                             decryptYES24(epubFileName, userId, libName, filePath)
                         }
                         "ECO_MOA" -> {
-                            Log.d("TESTECOM", "ECO_MOA")
                             decryptECOMoa(epubFileName, filePath, moaLicense, progressBar)
                         }
                         else -> false

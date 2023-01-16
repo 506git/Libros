@@ -11,10 +11,6 @@ import androidx.fragment.app.FragmentActivity
 import eco.libros.android.R
 import eco.libros.android.common.ProgressFragment
 import eco.libros.android.common.api.LibrosUpload
-import eco.libros.android.common.database.EbookDownloadDBFacade
-import eco.libros.android.common.database.ViewerDBFacade
-import eco.libros.android.common.model.EbookListVO
-import eco.libros.android.common.utill.EBookDownloadTask
 import eco.libros.android.common.utill.LibrosLog
 import eco.libros.android.common.utill.LibrosUtil
 import eco.libros.android.common.variable.GlobalVariable
@@ -118,7 +114,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                 val eBookData = obj[1] as MyEbookListModel
                 val fileName = obj[2].toString()
                 val drmLicense = obj[3].toString()
-                Log.d("TESTOBJ", successResult.toString())
+
                 if (successResult) {
                     if (fileName != null) {
                         withContext(IO) {
@@ -149,6 +145,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                                eBookData.lentKey,"${LibrosUtil.getEPUBRootPath(mActivity)}/${mActivity.resources.getString(R.string.sdcard_dir_name)}/${fileName}/${fileName}",null
 //                            )
 //                        }
+                        val mSocket = (mActivity as MainActivity).mSocket
                         val file = arrayOfNulls<String?>(1)
 
                         // Type the path of the files in here
@@ -158,7 +155,12 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                        FileManager().zipFolder("$path/$fileName","$path/ziptest.zip")
 //                        FileManager().zipFile(file, "$path/$fileName/zipTest.zip")
 
-                        val zipFile = CompressZip().compress("$path/$fileName", path, fileName)
+                        val zipFile = CompressZip().compress(
+                            "$path/$fileName",
+                            path,
+                            fileName,
+                            mSocket
+                        )
 
 //                        LibrosRepository().checkAuthRepo(tempId, userAuthNum,encryptYn,resources.getString(R.string.device_type))?.let { response ->
 //                            if(response.isSuccessful){
@@ -169,7 +171,6 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
 //                        }
 //                        showMsgDialog("알림", "다운로드 되었습니다.", "확인",eBookData.lentKey)
                         runBlocking {
-                            val mSocket = (mActivity as MainActivity).mSocket
                             LibrosUpload().upload(eBookData.uploadUrl, zipFile, eBookData, mSocket)
                         }
 //                        val deleteFile: File = File(path)
@@ -207,7 +208,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                             }
 
                             var file: File = File(path, fileName)
-                            Log.d("TESTFILE",file.exists().toString())
+
                             if (file != null && file.exists()) {
                                 FileManager().deleteFolder(file)
                             }
@@ -260,7 +261,7 @@ class EBookImageDrmEcoMoaAsyncTask(_activity: Activity, _fileType: String) {
                     btnMsg
                 ) { dialog, _ ->
                     dialog.dismiss()
-                    Log.d("TESTLENTKEY",lentKey)
+
                     val intent = Intent(GlobalVariable.DOWNLOAD_RESULT)
 //                    intent.action = GlobalVariable.DOWNLOAD_RESULT
                     intent.putExtra("lent_key",lentKey)

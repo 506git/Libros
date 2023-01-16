@@ -72,7 +72,6 @@ class DrmECOMoaRelease(
         val reader = saxParser.xmlReader
 
         val rootFile: File = File(eBookFileFolderName + "/META-INF", "encryption.xml")
-        Log.d("test", rootFile.toString())
 
         if (rootFile.exists()) {
 
@@ -122,20 +121,20 @@ class DrmECOMoaRelease(
         } else{
             openFileName
         }
-        Log.d("TESTDRM1",requestFileName.toString())
+
         if (requestFileName == null){
             return null
         }
 
         val isEncrypted = MoaDrmWrapper.moadrmIsEncrypt(requestFileName)
-        Log.d("TESTDRM2",isEncrypted.toString())
+
         if (isEncrypted){
             // 암호화된 파일임
             // 복호화 Case1) path지정 복호화 예제
             // 만약 파일을 풀어둔채로 사용중이면, 아래 함수 이용가능. 복호화된 바이트를 리턴함
             val rtn = MoaDrmJni.moadrmFileDecryptRtn()
             MoaDrmWrapper.moadrmFileDecrypt(openFileName, rtn)
-            Log.d("TESTDRM",rtn.arrDecryptData.toString())
+
             return rtn.arrDecryptData
         } else
             return getReadFile(openFileName)
@@ -151,10 +150,8 @@ class DrmECOMoaRelease(
         val reader = saxParser.xmlReader
 
         val rootFile: File = File("$eBookFileFolderName/META-INF", "encryption.xml")
-        Log.d("test", rootFile.toString())
 
         if (rootFile.exists()) {
-            Log.d("test2", rootFile.exists().toString())
             val encryptionXmlHandler = EcoMoaImageEncryptionXMLHandler()
             reader.contentHandler = encryptionXmlHandler
             reader.parse(InputSource(InputStreamReader(FileInputStream(rootFile))))
@@ -173,9 +170,7 @@ class DrmECOMoaRelease(
 
             }
             isSuccessDownLoad = true
-            Log.d("test3", isSuccessDownLoad.toString())
         }
-        Log.d("test4", isSuccessDownLoad.toString())
         return isSuccessDownLoad
     }
 

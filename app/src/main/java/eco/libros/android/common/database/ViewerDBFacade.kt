@@ -87,7 +87,7 @@ class ViewerDBFacade(context: Context) {
                     bookData = cBook.getString(2)
                 )
             }
-            Log.d("testcuros",book.toString())
+
             db.setTransactionSuccessful()
         }catch (e: Exception){
             LibrosLog.print(e.toString())

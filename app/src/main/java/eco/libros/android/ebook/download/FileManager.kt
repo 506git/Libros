@@ -29,7 +29,7 @@ class FileManager {
         try{
             System.loadLibrary("xsync-keygen")
         } catch (e:Exception){
-            Log.d("test","err" + e.toString())
+            Log.d("test", "err$e")
         }
 //        private static final int BUFFER = 80000;
     }
@@ -40,7 +40,6 @@ class FileManager {
                 R.string.sdcard_dir_name
             )
         }/$uuid/$uuid"
-        Log.d("testddz", "85")
         task.progressTask(85)
         try {
             FileInputStream(zipFile).use { fis ->
@@ -74,7 +73,7 @@ class FileManager {
                     }
 
                     task.progressTask(88)
-                    Log.d("testddz", "88")
+
                     while (zis.nextEntry.apply { ze = this } != null) {
                         val fileNameToUnZip = ze?.name
 
@@ -160,7 +159,7 @@ class FileManager {
                     if (!nomediaFile.exists()) {
                         nomediaFile.createNewFile()
                     }
-                    Log.d("testddz", "zis.toString()ff")
+
                     task.progressTask(88)
 
                     while (zis.nextEntry.apply { ze = this } != null) {
@@ -602,7 +601,6 @@ class FileManager {
             LibrosLog.print(e.toString())
             retval = -1
         } catch (e: IOException){
-            Log.d("TEST11","tt22")
             LibrosLog.print(e.toString())
             retval = -1
         } finally {

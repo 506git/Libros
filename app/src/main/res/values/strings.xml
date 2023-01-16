@@ -6,6 +6,11 @@
 
     <string name="sdcard_dir_name">libros</string>
 
+    <string name="txt_address_init">초기 주소로 변경\n(http://121.130.28.115:8000/ebook_worker)</string>
+
+    <string name="BASE_URL">http://121.130.28.115:8000/ebook_worker</string>
+    <string name="LIBROS_SOCKET_ADDRESS">LIBROS_SOCKET_ADDRESS</string>
+
     <string name="sangsang_scheme">sangsang</string>
     <string name="sangsang_host">home</string>
 
